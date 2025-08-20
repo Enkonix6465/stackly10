@@ -233,8 +233,7 @@ export default function UserDetailsSection() {
               </AreaChart>
             </ResponsiveContainer>
           </div>
-
-          {/* Customer Growth */}
+           
           <div className="p-6 rounded-2xl shadow bg-white text-black border border-red-500">
             <h2 className="text-xl font-semibold mb-4 text-red-600">Customer Growth (Monthly)</h2>
             <ResponsiveContainer width="100%" height={300}>
@@ -263,14 +262,6 @@ export default function UserDetailsSection() {
           </ResponsiveContainer>
         </div>
       </div>
-
-      {/* Instructor Details Table Section */}
-      
-      {/* Dashboard Graphs */}
-     
-      {/* Webinar Registrations Section */}
-      
-      
-    </div>
+     </div>
   );
 }
