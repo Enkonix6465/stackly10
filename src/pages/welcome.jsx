@@ -272,7 +272,7 @@ export default function LoginPage() {
                   <label className="block text-white mb-1">Confirm Password</label>
                   <input
                     type="password"
-                    className="w-full text-whitegit commit -m "chore: push welcome.jsx" border-b-2 border-gray-300 focus:border-red-500 bg-transparent py-2 pl-2 outline-none"
+                    className="w-full text-white border-b-2 border-gray-300 focus:border-red-500 bg-transparent py-2 pl-2 outline-none"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
