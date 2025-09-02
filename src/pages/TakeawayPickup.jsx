@@ -193,6 +193,36 @@ const TakeawayPickupHero = () => {
 
   return (
     <div dir={dir} className={sectionBg}>
+      {/* Registration Form Section with transparent red background */}
+      <section className="absolute top-0 left-0 w-full h-full flex items-center justify-center z-20">
+        <div className="bg-red-500 bg-opacity-40 rounded-2xl p-8 max-w-md w-full shadow-lg flex flex-col items-center">
+          <h2 className="text-3xl font-bold text-white mb-6">Welcome to Foodify</h2>
+          <form className="w-full">
+            <div className="flex gap-4 mb-4">
+              <div className="w-1/2">
+                <label className="block text-white mb-1">First Name</label>
+                <input type="text" className="w-full bg-transparent border-b border-white text-white py-2 px-2 focus:outline-none" value="Harika" readOnly />
+              </div>
+              <div className="w-1/2">
+                <label className="block text-white mb-1">Last Name</label>
+                <input type="text" className="w-full bg-transparent border-b border-white text-white py-2 px-2 focus:outline-none" value="Bajanthri" readOnly />
+              </div>
+            </div>
+            <div className="mb-4">
+              <label className="block text-white mb-1">Email</label>
+              <input type="email" className="w-full bg-transparent border-b border-white text-white py-2 px-2 focus:outline-none" value="harika" readOnly />
+            </div>
+            <div className="mb-6">
+              <label className="block text-white mb-1">Password</label>
+              <input type="password" className="w-full bg-transparent border-b border-white text-white py-2 px-2 focus:outline-none" value="" />
+            </div>
+            <button type="submit" className="w-full bg-red-500 text-white font-bold py-3 rounded-full mb-4">Register</button>
+            <div className="text-center">
+              <a href="#" className="text-white underline">Back to Login</a>
+            </div>
+          </form>
+        </div>
+      </section>
       {/* Theme Toggle Button */}
       <div className="flex justify-end p-4">
         <button
