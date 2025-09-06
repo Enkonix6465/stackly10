@@ -190,74 +190,33 @@ const stepIcons = [
 
 
 const FoodDeliveryHero = () => {
-  // Language and theme state synced with Header
+  // Language and theme state must be initialized first
   const [language, setLanguage] = useState('en');
   const [theme, setTheme] = useState('light');
-  // Map UI language names to codes
-  const langMap = {
-    English: 'en',
-    Arabic: 'ar',
-    Hebrew: 'he',
-    en: 'en',
-    ar: 'ar',
-    he: 'he',
-  };
-  React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedTheme = localStorage.getItem('theme') || 'light';
-      setTheme(storedTheme);
-      const storedSelectedLang = localStorage.getItem('selectedLanguage') || 'English';
-      setLanguage(langMap[storedSelectedLang] || 'en');
-      const handleThemeChange = () => {
-        const newTheme = localStorage.getItem('theme') || 'light';
-        setTheme(newTheme);
-      };
-      const handleLangChange = () => {
-        const newSelectedLang = localStorage.getItem('selectedLanguage') || 'English';
-        setLanguage(langMap[newSelectedLang] || 'en');
-      };
-      window.addEventListener('theme-changed', handleThemeChange);
-      window.addEventListener('storage', handleThemeChange);
-      window.addEventListener('language-changed', handleLangChange);
-      window.addEventListener('storage', handleLangChange);
-      return () => {
-        window.removeEventListener('theme-changed', handleThemeChange);
-        window.removeEventListener('storage', handleThemeChange);
-        window.removeEventListener('language-changed', handleLangChange);
-        window.removeEventListener('storage', handleLangChange);
-      };
-    }
-  }, []);
-
-  // Theme toggle handler
-  const handleToggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('theme', newTheme);
-      window.dispatchEvent(new Event('theme-changed'));
-    }
-  };
-
-  // Set RTL/LTR direction
-  const dir = language === 'ar' || language === 'he' ? 'rtl' : 'ltr';
-
-  // Testimonial carousel
-  const [index, setIndex] = useState(0);
-  const nextTestimonial = () => {
-    setIndex((prev) => (prev + 1) % translations[language].testimonials.length);
-  };
+  // State for current testimonial index
+  const [testimonialIndex, setTestimonialIndex] = useState(0);
+  // Handlers for testimonial navigation
+  const testimonials = translations[language].testimonials;
+  const testimonial = testimonials[testimonialIndex];
   const prevTestimonial = () => {
-    setIndex((prev) => (prev - 1 + translations[language].testimonials.length) % translations[language].testimonials.length);
+    setTestimonialIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
   };
-  const testimonial = translations[language].testimonials[index];
-
-  // Section background classes
-  const sectionBg = theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black';
-  const sectionAltBg = theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-red-50 text-black';
-  const cardBg = theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-100 text-black';
-  const pricingBg = theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-black';
-
+  const nextTestimonial = () => {
+    setTestimonialIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+  };
+  // Set text direction based on language
+  const dir = (language === 'ar' || language === 'he') ? 'rtl' : 'ltr';
+  // Default background for main section
+  const sectionBg = 'bg-gray-50 dark:bg-gray-900';
+  // Default background for alternate sections
+  const sectionAltBg = 'bg-white dark:bg-gray-800';
+  // Default background for pricing sections
+  const pricingBg = 'bg-red-50 dark:bg-red-900';
+  // Default background for testimonial cards
+  const cardBg = theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100';
+  const handleToggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
   return (
     <div dir={dir} className={sectionBg}>
       {/* Theme Toggle Button */}
@@ -270,7 +229,7 @@ const FoodDeliveryHero = () => {
         </button>
       </div>
       {/* Hero Section */}
-  <section className="relative w-full h-screen overflow-hidden">
+      <section className="relative w-full h-screen overflow-hidden">
         <video
           className="absolute top-0 left-0 w-full h-full object-cover"
           src={foodhero}
@@ -279,19 +238,19 @@ const FoodDeliveryHero = () => {
           muted
           playsInline
         />
-  <div className="absolute top-0 left-0 w-full h-full bg-black/40"></div>
-  <div className="relative z-10 flex flex-col items-center justify-center text-center h-full px-4">
-          <h1 className="text-5xl md:text-7xl font-bold text-white drop-shadow-lg" style={dir === 'rtl' ? {textAlign:'right'} : {}}>
+        <div className="absolute top-0 left-0 w-full h-full bg-black/40"></div>
+        <div className="relative z-10 flex flex-col items-center justify-center text-center h-full px-4">
+          <h1 className="text-5xl md:text-7xl font-bold text-white drop-shadow-lg" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
             {translations[language].heroTitle}
           </h1>
-          <p className="mt-6 text-lg md:text-2xl text-gray-200 max-w-2xl" style={dir === 'rtl' ? {textAlign:'right'} : {}}>
+          <p className="mt-6 text-lg md:text-2xl text-gray-200 max-w-2xl" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
             {translations[language].heroDesc}
           </p>
         </div>
       </section>
 
-  {/* About Our Service Section */}
-  <section className={`py-20 px-6 md:px-20 ${sectionAltBg}`}> 
+      {/* About Our Service Section */}
+      <section className={`py-20 px-6 md:px-20 ${sectionAltBg}`}>
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left Image */}
           <div>
@@ -304,183 +263,112 @@ const FoodDeliveryHero = () => {
 
           {/* Right Content */}
           <div>
-            <h2 className="text-4xl font-bold mb-6" style={dir === 'rtl' ? {textAlign:'right'} : {}}>
+            <h2 className="text-4xl font-bold mb-6" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
               {translations[language].aboutTitle}
             </h2>
             {translations[language].about.map((p, i) => (
-              <p className="mb-4" key={i} style={dir === 'rtl' ? {textAlign:'right'} : {}}>{p}</p>
+              <p className="mb-4" key={i} style={dir === 'rtl' ? { textAlign: 'right' } : {}}>{p}</p>
             ))}
-
-
           </div>
         </div>
       </section>
 
-      {/*how it works section */  }
-       
-
-  <section className={`py-20 px-6 ${pricingBg} text-center`} id="pricing">
-      <h2 className="text-4xl font-bold text-red-500 mb-4" style={dir === 'rtl' ? {textAlign:'right'} : {}}>{translations[language].pricingTitle}</h2>
-  <p className="max-w-2xl mx-auto mb-12" style={dir === 'rtl' ? {textAlign:'right'} : {}}>
-        {translations[language].pricingDesc}
-      </p>
-        <h2 className="text-4xl font-bold text-red-500 mb-4" style={dir === 'rtl' ? {textAlign:'right'} : {}}>{translations[language].howItWorksTitle}</h2>
-        <p className={`${theme === 'dark' ? 'text-white' : 'text-gray-600'} max-w-2xl mx-auto mb-12`} style={dir === 'rtl' ? {textAlign:'right'} : {}}>
+      {/* How It Works Section */}
+      <section className={`py-20 px-6 ${pricingBg} text-center`} id="how-it-works">
+        <h2 className="text-4xl font-bold text-red-500 mb-4" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>{translations[language].howItWorksTitle}</h2>
+        <p className={`${theme === 'dark' ? 'text-white' : 'text-gray-600'} max-w-2xl mx-auto mb-12`} style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
           {translations[language].howItWorksDesc}
         </p>
         <div className="flex flex-wrap justify-center items-center gap-6">
           {translations[language].steps.map((step, index) => (
             <div key={index} className="flex items-center">
-              {/* Step card */}
-              <div className="flex flex-col  hover:scale-105 transition items-center max-w-[200px]">
-                <div className={`rounded-full w-16 h-16 flex items-center justify-center mb-4 shadow-md ${theme === 'dark' ? 'bg-red-700' : 'bg-red-500'}`}> 
-                  {stepIcons[index]}
-                </div>
+              <div className="flex flex-col hover:scale-105 transition items-center max-w-[200px]">
+                <div className={`rounded-full w-16 h-16 flex items-center justify-center mb-4 shadow-md ${theme === 'dark' ? 'bg-red-700' : 'bg-red-500'}`}>{stepIcons[index]}</div>
                 <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
                 <p className={`${theme === 'dark' ? 'text-white' : 'text-gray-600'} text-sm`}>{step.description}</p>
               </div>
-
-              {/* Arrow (between steps only, hidden on small screens) */}
               {index < translations[language].steps.length - 1 && (
                 <FaArrowRight size={30} className={`${theme === 'dark' ? 'text-white' : 'text-gray-400'} mx-6 hidden md:block`} />
               )}
             </div>
           ))}
         </div>
+      </section>
 
-      <div className="grid  md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        {translations[language].plans.map((plan, index) => (
-          <div
-            key={index}
-            className={`flex flex-col items-center rounded-2xl p-8 shadow-lg border 
-              ${plan.highlighted ? (theme === 'dark' ? 'bg-red-700 text-white scale-105' : 'bg-red-500 text-white scale-105') : (theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-gray-800')}`}
-            style={dir === 'rtl' ? {textAlign:'right'} : {}}
-          >
-            <h3 className="text-2xl font-bold mb-4">{plan.name}</h3>
-            <div className="text-4xl font-extrabold mb-2">
-              {plan.price} <span className="text-lg font-medium">{plan.period}</span>
-            </div>
-            <ul className="mb-6 space-y-2">
-              {plan.features.map((feature, i) => (
-                <li key={i} className="text-sm">{feature}</li>
-              ))}
-            </ul>
-            <button
-              className={`px-6 py-3 rounded-full font-semibold transition 
-                ${plan.highlighted 
-                  ? "bg-white text-red-500 hover:bg-gray-100" 
-                  : "bg-red-500 text-white hover:bg-red-600"}`}
-            >
-              {language === 'ar' ? 'ابدأ الآن' : language === 'he' ? 'התחל עכשיו' : 'Get Started'}
-            </button>
-          </div>
-        ))}
-      </div>
-    </section>
-
-
-
-  <section className={`py-10 px-4 ${sectionAltBg}`}>
-  <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center">
-    {/* Left Side - Text Card */}
-    <div className="text-center md:text-left">
-      <h2 className={`text-4xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : 'text-black'}`} style={dir === 'rtl' ? {textAlign:'right'} : {}}>
-        {translations[language].testimonialsTitle}
-      </h2>
-      <div className={`rounded-2xl p-8 shadow-lg ${cardBg}`}>
-        <p className="text-lg italic mb-6" style={dir === 'rtl' ? {textAlign:'right'} : {}}>
-          "{testimonial.text}"
+      {/* Pricing Section */}
+      <section className={`py-20 px-6 ${pricingBg} text-center`} id="pricing">
+        <h2 className="text-4xl font-bold text-red-500 mb-4" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>{translations[language].pricingTitle}</h2>
+        <p className="max-w-2xl mx-auto mb-12" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
+          {translations[language].pricingDesc}
         </p>
-        <h3 className="text-xl font-semibold">{testimonial.name}</h3>
-        <p className="text-red-500 text-sm">{testimonial.role}</p>
-      </div>
-
-      {/* Arrows */}
-      <div className="flex justify-center md:justify-start gap-4 mt-6">
-        <button
-          onClick={prevTestimonial}
-          className="p-3 rounded-full bg-red-500 text-white hover:bg-red-600 transition"
-        >
-          <FaArrowLeft />
-        </button>
-        <button
-          onClick={nextTestimonial}
-          className="p-3 rounded-full bg-red-500 text-white hover:bg-red-600 transition"
-        >
-          <FaArrowRight />
-        </button>
-      </div>
-    </div>
-
-    {/* Right Side - Image */}
-    <div className="flex justify-center">
-      <img
-        src={food}
-        alt="Delicious food"
-        className="rounded-2xl shadow-lg w-full max-w-md h-[350px] w-[500px] object-cover"
-      />
-    </div>
-  </div>
-</section>
-<section className={`py-20 px-6 ${pricingBg} text-center`}>
-      <h2 className="text-4xl font-bold text-red-500 mb-4" style={dir === 'rtl' ? {textAlign:'right'} : {}}>{translations[language].howItWorksTitle}</h2>
-      <p className={`${theme === 'dark' ? 'text-white' : 'text-gray-600'} max-w-2xl mx-auto mb-12`} style={dir === 'rtl' ? {textAlign:'right'} : {}}>
-        {translations[language].howItWorksDesc}
-      </p>
-
-      <div className="flex flex-wrap justify-center items-center gap-6">
-        {translations[language].steps.map((step, index) => (
-          <div key={index} className="flex items-center">
-            {/* Step card */}
-            <div className="flex flex-col  hover:scale-105 transition items-center max-w-[200px]">
-              <div className={`rounded-full w-16 h-16 flex items-center justify-center mb-4 shadow-md ${theme === 'dark' ? 'bg-red-700' : 'bg-red-500'}`}> 
-                {stepIcons[index]}
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {translations[language].plans.map((plan, index) => (
+            <div
+              key={index}
+              className={`flex flex-col items-center rounded-2xl p-8 shadow-lg border ${plan.highlighted ? (theme === 'dark' ? 'bg-red-700 text-white scale-105' : 'bg-red-500 text-white scale-105') : (theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-gray-800')}`}
+              style={dir === 'rtl' ? { textAlign: 'right' } : {}}
+            >
+              <h3 className="text-2xl font-bold mb-4">{plan.name}</h3>
+              <div className="text-4xl font-extrabold mb-2">
+                {plan.price} <span className="text-lg font-medium">{plan.period}</span>
               </div>
-              <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
-              <p className={`${theme === 'dark' ? 'text-white' : 'text-gray-600'} text-sm`}>{step.description}</p>
+              <ul className="mb-6 space-y-2">
+                {plan.features.map((feature, i) => (
+                  <li key={i} className="text-sm">{feature}</li>
+                ))}
+              </ul>
+              <button
+                className={`px-6 py-3 rounded-full font-semibold transition ${plan.highlighted ? "bg-white text-red-500 hover:bg-gray-100" : "bg-red-500 text-white hover:bg-red-600"}`}
+              >
+                {language === 'ar' ? 'ابدأ الآن' : language === 'he' ? 'התחל עכשיו' : 'Get Started'}
+              </button>
             </div>
+          ))}
+        </div>
+      </section>
 
-            {/* Arrow (between steps only, hidden on small screens) */}
-            {index < translations[language].steps.length - 1 && (
-              <FaArrowRight size={30} className="text-gray-400 mx-6 hidden md:block" />
-            )}
+      {/* Testimonials Section */}
+      <section className={`py-10 px-4 ${sectionAltBg}`}>
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+          <div className="text-center md:text-left">
+            <h2 className={`text-4xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : 'text-black'}`} style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
+              {translations[language].testimonialsTitle}
+            </h2>
+            <div className={`rounded-2xl p-8 shadow-lg ${cardBg}`}>
+              <p className="text-lg italic mb-6" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
+                "{testimonial.text}"
+              </p>
+              <h3 className="text-xl font-semibold">{testimonial.name}</h3>
+              <p className="text-red-500 text-sm">{testimonial.role}</p>
+            </div>
+            <div className="flex justify-center md:justify-start gap-4 mt-6">
+              <button onClick={prevTestimonial} className="p-3 rounded-full bg-red-500 text-white hover:bg-red-600 transition"><FaArrowLeft /></button>
+              <button onClick={nextTestimonial} className="p-3 rounded-full bg-red-500 text-white hover:bg-red-600 transition"><FaArrowRight /></button>
+            </div>
           </div>
-        ))}
-      </div>
-    </section>
-
-
-
+          <div className="flex justify-center">
+            <img src={food} alt="Delicious food" className="rounded-2xl shadow-lg w-full max-w-md h-[350px] w-[500px] object-cover" />
+          </div>
+        </div>
+      </section>
 
       {/* Call to Action Section */}
-  <section className="relative py-24 px-6 md:px-20 text-white">
-  {/* Background Image */}
-  <img
-    src={food3}
-    alt="Delicious food"
-    className="absolute inset-0 w-full h-full object-cover z-0"
-  />
-
-  {/* Red Transparent Overlay */}
-  <div className="absolute inset-0 bg-red-500/70 z-0"></div>
-
-  {/* Content */}
-  <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-3xl mx-auto">
-    <h2 className="text-5xl  font-extrabold mb-6" style={dir === 'rtl' ? {textAlign:'right'} : {}}>
-      {translations[language].ctaTitle}
-    </h2>
-    <p className="text-lg md:text-xl mb-8 leading-relaxed" style={dir === 'rtl' ? {textAlign:'right'} : {}} dangerouslySetInnerHTML={{__html: translations[language].ctaDesc}} />
-    <button
-      onClick={() => {
-        document.getElementById("pricing").scrollIntoView({ behavior: "smooth" });
-      }}
-      className="bg-white text-black py-4 px-10 text-lg font-semibold rounded-full shadow-lg hover:bg-gray-100 transition duration-300"
-    >
-      {translations[language].ctaBtn}
-    </button>
-  </div>
-</section>
-
+      <section className="relative py-24 px-6 md:px-20 text-white">
+        <img src={food3} alt="Delicious food" className="absolute inset-0 w-full h-full object-cover z-0" />
+        <div className="absolute inset-0 bg-red-500/70 z-0"></div>
+        <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-3xl mx-auto">
+          <h2 className="text-5xl font-extrabold mb-6" style={dir === 'rtl' ? {textAlign:'right'} : {}}>{translations[language].ctaTitle}</h2>
+          <p className="text-lg md:text-xl mb-8 leading-relaxed" style={dir === 'rtl' ? {textAlign:'right'} : {}} dangerouslySetInnerHTML={{__html: translations[language].ctaDesc}} />
+          <button
+            onClick={() => {
+              document.getElementById("pricing").scrollIntoView({ behavior: "smooth" });
+            }}
+            className="bg-white text-black py-4 px-10 text-lg font-semibold rounded-full shadow-lg hover:bg-gray-100 transition duration-300"
+          >
+            {translations[language].ctaBtn}
+          </button>
+        </div>
+      </section>
     </div>
   );
 };
