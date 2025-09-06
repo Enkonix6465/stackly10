@@ -181,6 +181,11 @@ export default function Home2() {
       className={`flex flex-col min-h-screen ${theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'}`}
       dir={isRTL ? 'rtl' : 'ltr'}
     >
+      {/* Pricing Section (moved from FoodDelivery) */}
+      <section className="py-20 px-6 text-center" id="pricing">
+        <h2 className="text-4xl font-bold text-red-500 mb-4">Our Pricing</h2>
+        <p className="max-w-2xl mx-auto mb-12">Choose a plan that fits your appetite. Upgrade anytime — no hidden fees!</p>
+      </section>
       {/* Theme Toggle Button */}
       <button
         onClick={toggleTheme}

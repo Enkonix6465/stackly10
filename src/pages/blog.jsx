@@ -19,7 +19,7 @@ const translations = {
       { myth: "You can’t customize your order when ordering online.", fact: "Our menu lets you add special instructions, choose spice levels, and request add-ons with ease." },
       { myth: "Delivery food is unhealthy.", fact: "We offer balanced meals, healthy options, and freshly prepared dishes to suit your lifestyle." },
     ],
-    tipsTitle: "Cooking Tips 🧑‍🍳",
+    tipsTitle: "Cooking Tips ",
   },
   ar: {
     heroTitle: "استكشف مدوناتنا",
@@ -38,7 +38,7 @@ const translations = {
       { myth: "لا يمكنك تخصيص طلبك عند الطلب عبر الإنترنت.", fact: "تتيح لك قائمتنا إضافة تعليمات خاصة، واختيار مستوى التوابل، وطلب الإضافات بسهولة." },
       { myth: "طعام التوصيل غير صحي.", fact: "نقدم وجبات متوازنة وخيارات صحية وأطباق طازجة تناسب نمط حياتك." },
     ],
-    tipsTitle: "نصائح الطبخ 🧑‍🍳",
+    tipsTitle: "نصائح الطبخ ",
   },
   he: {
     heroTitle: "גלה את הבלוגים שלנו",
@@ -57,7 +57,7 @@ const translations = {
       { myth: "אי אפשר להתאים אישית הזמנה אונליין.", fact: "התפריט שלנו מאפשר להוסיף הוראות מיוחדות, לבחור רמת חריפות ולבקש תוספות בקלות." },
       { myth: "אוכל משלוחים לא בריא.", fact: "אנחנו מציעים מנות מאוזנות, אפשרויות בריאות ואוכל טרי שמותאם לאורח החיים שלך." },
     ],
-    tipsTitle: "טיפים לבישול 🧑‍🍳",
+    tipsTitle: "טיפים לבישול ",
   },
 };
 import blogHero from "../assets/blog.mp4";
