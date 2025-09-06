@@ -190,8 +190,7 @@ export default function Home2() {
         {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
       </button>
 
-      {/* Our Impact Section */}
-      <ImpactSection theme={theme} />
+      
 			
 			{/* Hero Section */}
       <section className={`relative flex flex-col items-center justify-center h-screen w-full overflow-hidden ${theme === 'dark' ? 'bg-black' : ''}`}>
