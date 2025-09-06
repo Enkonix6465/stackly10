@@ -7,7 +7,6 @@ import food3 from "../assets/food3.jpg"; // Replace with your call to action ima
 import { FaUtensils, FaShoppingCart, FaTruck, FaSmile, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 
-// Translation object for all text
 const translations = {
   en: {
     heroTitle: "Delicious Food Delivered Fast",
@@ -210,7 +209,6 @@ const FoodDeliveryHero = () => {
   const sectionBg = 'bg-gray-50 dark:bg-gray-900';
   // Default background for alternate sections
   const sectionAltBg = 'bg-white dark:bg-gray-800';
-  // Default background for pricing sections
   const pricingBg = 'bg-red-50 dark:bg-red-900';
   // Default background for testimonial cards
   const cardBg = theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100';
