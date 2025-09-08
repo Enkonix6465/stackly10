@@ -189,8 +189,31 @@ const stepIcons = [
 
 
 const FoodDeliveryHero = () => {
-  // Language and theme state must be initialized first
-  const [language, setLanguage] = useState('en');
+  // Sync language with global selection in Header
+  const [language, setLanguage] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const selected = localStorage.getItem('selectedLanguage') || 'English';
+      const langMap = { English: 'en', Arabic: 'ar', Hebrew: 'he', en: 'en', ar: 'ar', he: 'he' };
+      return langMap[selected] || 'en';
+    }
+    return 'en';
+  });
+  // Listen for language changes from Header
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const handleLanguageChangeEvent = () => {
+        const selected = localStorage.getItem('selectedLanguage') || 'English';
+        const langMap = { English: 'en', Arabic: 'ar', Hebrew: 'he', en: 'en', ar: 'ar', he: 'he' };
+        setLanguage(langMap[selected] || 'en');
+      };
+      window.addEventListener('language-changed', handleLanguageChangeEvent);
+      window.addEventListener('storage', handleLanguageChangeEvent);
+      return () => {
+        window.removeEventListener('language-changed', handleLanguageChangeEvent);
+        window.removeEventListener('storage', handleLanguageChangeEvent);
+      };
+    }
+  }, []);
   const [theme, setTheme] = useState('light');
   // State for current testimonial index
   const [testimonialIndex, setTestimonialIndex] = useState(0);
@@ -217,14 +240,11 @@ const FoodDeliveryHero = () => {
   };
   return (
     <div dir={dir} className={sectionBg}>
-      {/* Theme Toggle Button */}
-      <div className="flex justify-end p-4">
-        <button
-          onClick={handleToggleTheme}
-          className={`px-4 py-2 rounded-full font-semibold shadow transition duration-300 ${theme === 'dark' ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}
-        >
-          {theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-        </button>
+      {/* Language Switcher */}
+      <div className="flex justify-end p-4 gap-2">
+        <button onClick={() => setLanguage('en')} className={`px-2 py-1 rounded ${language === 'en' ? 'bg-red-500 text-white' : 'bg-gray-200'}`}>EN</button>
+        <button onClick={() => setLanguage('ar')} className={`px-2 py-1 rounded ${language === 'ar' ? 'bg-red-500 text-white' : 'bg-gray-200'}`}>AR</button>
+        <button onClick={() => setLanguage('he')} className={`px-2 py-1 rounded ${language === 'he' ? 'bg-red-500 text-white' : 'bg-gray-200'}`}>HE</button>
       </div>
       {/* Hero Section */}
       <section className="relative w-full h-screen overflow-hidden">
