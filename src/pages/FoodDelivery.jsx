@@ -177,7 +177,7 @@ const translations = {
     ctaBtn: "הזמינו עכשיו",
   },
 };
- 
+
 
 const stepIcons = [
   <FaUtensils size={28} className="text-white" />,
@@ -228,28 +228,47 @@ const FoodDeliveryHero = () => {
   };
   // Set text direction based on language
   const dir = (language === 'ar' || language === 'he') ? 'rtl' : 'ltr';
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedTheme = localStorage.getItem('theme') || 'light';
+      setTheme(storedTheme);
+
+      const handleThemeChange = () => {
+        const newTheme = localStorage.getItem('theme') || 'light';
+        setTheme(newTheme);
+      };
+
+      window.addEventListener('theme-changed', handleThemeChange);
+      window.addEventListener('storage', handleThemeChange);
+
+      return () => {
+        window.removeEventListener('theme-changed', handleThemeChange);
+        window.removeEventListener('storage', handleThemeChange);
+
+      };
+    }
+  }, []);
+
   // Default background for main section
-  const sectionBg = 'bg-gray-50 dark:bg-gray-900';
+  const sectionBg = theme === 'dark' ? 'bg-gray-900' : 'bg-gray-50';
+
   // Default background for alternate sections
-  const sectionAltBg = 'bg-white dark:bg-gray-800';
-  const pricingBg = 'bg-red-50 dark:bg-red-900';
+  const sectionAltBg = theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white';
+
+  // Background for pricing section
+  const pricingBg = theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-red-50';
+
   // Default background for testimonial cards
   const cardBg = theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100';
-  const handleToggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
+
   return (
-    <div dir={dir} className={sectionBg}>
-      {/* Language Switcher */}
-      <div className="flex justify-end p-4 gap-2">
-        <button onClick={() => setLanguage('en')} className={`px-2 py-1 rounded ${language === 'en' ? 'bg-red-500 text-white' : 'bg-gray-200'}`}>EN</button>
-        <button onClick={() => setLanguage('ar')} className={`px-2 py-1 rounded ${language === 'ar' ? 'bg-red-500 text-white' : 'bg-gray-200'}`}>AR</button>
-        <button onClick={() => setLanguage('he')} className={`px-2 py-1 rounded ${language === 'he' ? 'bg-red-500 text-white' : 'bg-gray-200'}`}>HE</button>
-      </div>
+  <div dir={dir} className={sectionBg}>
+       
       {/* Hero Section */}
       <section className="relative w-full h-screen overflow-hidden">
         <video
-          className="absolute top-0 left-0 w-full h-full object-cover"
+          className="absolute top-0 left-0 object-cover w-full h-full"
           src={foodhero}
           autoPlay
           loop
@@ -257,56 +276,56 @@ const FoodDeliveryHero = () => {
           playsInline
         />
         <div className="absolute top-0 left-0 w-full h-full bg-black/40"></div>
-        <div className="relative z-10 flex flex-col items-center justify-center text-center h-full px-4">
-          <h1 className="text-5xl md:text-7xl font-bold text-white drop-shadow-lg" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
+        <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 text-center">
+          <h1 className="text-5xl font-bold text-white md:text-7xl drop-shadow-lg" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
             {translations[language].heroTitle}
           </h1>
-          <p className="mt-6 text-lg md:text-2xl text-gray-200 max-w-2xl" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
+          <p className="max-w-2xl mt-6 text-lg text-gray-200 md:text-2xl" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
             {translations[language].heroDesc}
           </p>
         </div>
       </section>
 
       {/* About Our Service Section */}
-      <section className={`py-20 px-6 md:px-20 ${sectionAltBg}`}>
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+  <section className={`py-20 px-6 md:px-20 ${sectionAltBg}`}> 
+        <div className="grid items-center gap-12 md:grid-cols-2">
           {/* Left Image */}
           <div>
             <img
               src={serviceImg}
               alt="Our Service"
-              className="w-full h-auto rounded-2xl shadow-lg"
+              className="w-full h-auto shadow-lg rounded-2xl"
             />
           </div>
 
           {/* Right Content */}
           <div>
-            <h2 className="text-4xl font-bold mb-6" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
+            <h2 className="mb-6 text-4xl font-bold" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
               {translations[language].aboutTitle}
             </h2>
             {translations[language].about.map((p, i) => (
-              <p className="mb-4" key={i} style={dir === 'rtl' ? { textAlign: 'right' } : {}}>{p}</p>
+              <p className="mb-4 " key={i} style={dir === 'rtl' ? { textAlign: 'right' } : {}}>{p}</p>
             ))}
           </div>
         </div>
       </section>
 
       {/* How It Works Section */}
-      <section className={`py-20 px-6 ${pricingBg} text-center`} id="how-it-works">
-        <h2 className="text-4xl font-bold text-red-500 mb-4" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>{translations[language].howItWorksTitle}</h2>
-        <p className={`${theme === 'dark' ? 'text-white' : 'text-gray-600'} max-w-2xl mx-auto mb-12`} style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
+  <section className={`py-20 px-6 ${pricingBg} text-center`} id="how-it-works">
+        <h2 className="mb-4 text-4xl font-bold text-red-500" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>{translations[language].howItWorksTitle}</h2>
+        <p className="max-w-2xl mx-auto mb-12 text-gray-600 dark:text-white" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
           {translations[language].howItWorksDesc}
         </p>
-        <div className="flex flex-wrap justify-center items-center gap-6">
+        <div className="flex flex-wrap items-center justify-center gap-6">
           {translations[language].steps.map((step, index) => (
             <div key={index} className="flex items-center">
               <div className="flex flex-col hover:scale-105 transition items-center max-w-[200px]">
-                <div className={`rounded-full w-16 h-16 flex items-center justify-center mb-4 shadow-md ${theme === 'dark' ? 'bg-red-700' : 'bg-red-500'}`}>{stepIcons[index]}</div>
-                <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
-                <p className={`${theme === 'dark' ? 'text-white' : 'text-gray-600'} text-sm`}>{step.description}</p>
+                <div className="rounded-full w-16 h-16 flex items-center justify-center mb-4 shadow-md bg-red-500 dark:bg-red-700">{stepIcons[index]}</div>
+                <h3 className="mb-2 text-lg font-semibold">{step.title}</h3>
+                <p className="text-sm text-gray-600 dark:text-white">{step.description}</p>
               </div>
               {index < translations[language].steps.length - 1 && (
-                <FaArrowRight size={30} className={`${theme === 'dark' ? 'text-white' : 'text-gray-400'} mx-6 hidden md:block`} />
+                <FaArrowRight size={30} className="mx-6 hidden md:block text-gray-400 dark:text-white" />
               )}
             </div>
           ))}
@@ -314,20 +333,25 @@ const FoodDeliveryHero = () => {
       </section>
 
       {/* Pricing Section */}
-      <section className={`py-20 px-6 ${pricingBg} text-center`} id="pricing">
-        <h2 className="text-4xl font-bold text-red-500 mb-4" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>{translations[language].pricingTitle}</h2>
+  <section className={`py-20 px-6 ${pricingBg} text-center`} id="pricing">
+        <h2 className="mb-4 text-4xl font-bold text-red-500" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>{translations[language].pricingTitle}</h2>
         <p className="max-w-2xl mx-auto mb-12" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
           {translations[language].pricingDesc}
         </p>
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid max-w-6xl gap-8 mx-auto md:grid-cols-3">
           {translations[language].plans.map((plan, index) => (
             <div
               key={index}
-              className={`flex flex-col items-center rounded-2xl p-8 shadow-lg border ${plan.highlighted ? (theme === 'dark' ? 'bg-red-700 text-white scale-105' : 'bg-red-500 text-white scale-105') : (theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-gray-800')}`}
+              className={
+                `flex flex-col items-center rounded-2xl p-8 shadow-lg border ` +
+                (plan.highlighted
+                  ? 'bg-red-500 dark:bg-red-700 text-white scale-105'
+                  : 'bg-white dark:bg-gray-800 text-gray-800 dark:text-white')
+              }
               style={dir === 'rtl' ? { textAlign: 'right' } : {}}
             >
-              <h3 className="text-2xl font-bold mb-4">{plan.name}</h3>
-              <div className="text-4xl font-extrabold mb-2">
+              <h3 className="mb-4 text-2xl font-bold">{plan.name}</h3>
+              <div className="mb-2 text-4xl font-extrabold">
                 {plan.price} <span className="text-lg font-medium">{plan.period}</span>
               </div>
               <ul className="mb-6 space-y-2">
@@ -336,7 +360,11 @@ const FoodDeliveryHero = () => {
                 ))}
               </ul>
               <button
-                className={`px-6 py-3 rounded-full font-semibold transition ${plan.highlighted ? "bg-white text-red-500 hover:bg-gray-100" : "bg-red-500 text-white hover:bg-red-600"}`}
+                className={
+                  plan.highlighted
+                    ? "px-6 py-3 rounded-full font-semibold transition bg-white text-red-500 hover:bg-gray-100 dark:hover:bg-gray-200"
+                    : "px-6 py-3 rounded-full font-semibold transition bg-red-500 dark:bg-red-700 text-white hover:bg-red-600 dark:hover:bg-red-800"
+                }
               >
                 {language === 'ar' ? 'ابدأ الآن' : language === 'he' ? 'התחל עכשיו' : 'Get Started'}
               </button>
@@ -346,22 +374,22 @@ const FoodDeliveryHero = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className={`py-10 px-4 ${sectionAltBg}`}>
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+  <section className={`py-10 px-4 ${sectionAltBg}`}> 
+        <div className="grid items-center max-w-6xl gap-8 mx-auto md:grid-cols-2">
           <div className="text-center md:text-left">
-            <h2 className={`text-4xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : 'text-black'}`} style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
+            <h2 className="text-4xl font-bold mb-6 text-black dark:text-white" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
               {translations[language].testimonialsTitle}
             </h2>
             <div className={`rounded-2xl p-8 shadow-lg ${cardBg}`}>
-              <p className="text-lg italic mb-6" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
+              <p className="mb-6 text-lg italic" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
                 "{testimonial.text}"
               </p>
               <h3 className="text-xl font-semibold">{testimonial.name}</h3>
-              <p className="text-red-500 text-sm">{testimonial.role}</p>
+              <p className="text-sm text-red-500">{testimonial.role}</p>
             </div>
-            <div className="flex justify-center md:justify-start gap-4 mt-6">
-              <button onClick={prevTestimonial} className="p-3 rounded-full bg-red-500 text-white hover:bg-red-600 transition"><FaArrowLeft /></button>
-              <button onClick={nextTestimonial} className="p-3 rounded-full bg-red-500 text-white hover:bg-red-600 transition"><FaArrowRight /></button>
+            <div className="flex justify-center gap-4 mt-6 md:justify-start">
+              <button onClick={prevTestimonial} className="p-3 text-white transition bg-red-500 rounded-full hover:bg-red-600"><FaArrowLeft /></button>
+              <button onClick={nextTestimonial} className="p-3 text-white transition bg-red-500 rounded-full hover:bg-red-600"><FaArrowRight /></button>
             </div>
           </div>
           <div className="flex justify-center">
@@ -371,17 +399,17 @@ const FoodDeliveryHero = () => {
       </section>
 
       {/* Call to Action Section */}
-      <section className="relative py-24 px-6 md:px-20 text-white">
-        <img src={food3} alt="Delicious food" className="absolute inset-0 w-full h-full object-cover z-0" />
-        <div className="absolute inset-0 bg-red-500/70 z-0"></div>
-        <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-3xl mx-auto">
-          <h2 className="text-5xl font-extrabold mb-6" style={dir === 'rtl' ? {textAlign:'right'} : {}}>{translations[language].ctaTitle}</h2>
-          <p className="text-lg md:text-xl mb-8 leading-relaxed" style={dir === 'rtl' ? {textAlign:'right'} : {}} dangerouslySetInnerHTML={{__html: translations[language].ctaDesc}} />
+      <section className="relative px-6 py-24 text-white md:px-20">
+        <img src={food3} alt="Delicious food" className="absolute inset-0 z-0 object-cover w-full h-full" />
+        <div className="absolute inset-0 z-0 bg-red-500/70"></div>
+        <div className="relative z-10 flex flex-col items-center justify-center max-w-3xl mx-auto text-center">
+          <h2 className="mb-6 text-5xl font-extrabold" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>{translations[language].ctaTitle}</h2>
+          <p className="mb-8 text-lg leading-relaxed md:text-xl" style={dir === 'rtl' ? { textAlign: 'right' } : {}} dangerouslySetInnerHTML={{ __html: translations[language].ctaDesc }} />
           <button
             onClick={() => {
               document.getElementById("pricing").scrollIntoView({ behavior: "smooth" });
             }}
-            className="bg-white text-black py-4 px-10 text-lg font-semibold rounded-full shadow-lg hover:bg-gray-100 transition duration-300"
+            className="px-10 py-4 text-lg font-semibold text-black transition duration-300 bg-white rounded-full shadow-lg hover:bg-gray-100"
           >
             {translations[language].ctaBtn}
           </button>
