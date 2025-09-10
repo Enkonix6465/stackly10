@@ -209,7 +209,7 @@ export default function ContactHero() {
       <section className={`py-16 ${theme === 'dark' ? 'bg-[#222]' : 'bg-red-50'}`}> 
       <div className="max-w-6xl mx-auto px-6">
         {/* Section Heading */}
-        <h2 className={`text-3xl md:text-4xl font-bold text-center mb-12 ${theme === 'dark' ? 'text-red-500' : 'text-black'}`}
+  <h2 className={`text-4xl md:text-5xl font-extrabold text-center mb-12 ${theme === 'dark' ? 'text-red-500' : 'text-black'}`}
           style={dir === 'rtl' ? { direction: 'rtl' } : {}}>
           {translations[language].supportHeading}
         </h2>
@@ -241,12 +241,9 @@ export default function ContactHero() {
 
       <section className={`py-20 ${theme === 'dark' ? 'bg-[#181818]' : 'bg-[#fff]'}`}>
       <div className="max-w-4xl mx-auto px-6">
-        {/* Small Heading */}
-        <p className="text-red-500 font-semibold uppercase mb-2" style={dir === 'rtl' ? { direction: 'rtl' } : {}}>
-          {translations[language].getInTouch}
-        </p>
+         
         {/* Main Heading */}
-        <h2 className={`text-3xl md:text-4xl font-extrabold mb-10 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}
+  <h2 className={`text-4xl md:text-5xl font-extrabold mb-10 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}
           style={dir === 'rtl' ? { direction: 'rtl' } : {}}
           dangerouslySetInnerHTML={{ __html: translations[language].needHelp }} />
 
@@ -259,37 +256,57 @@ export default function ContactHero() {
           }}
         >
           <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <label className="block mb-2 font-medium" htmlFor="firstName">{translations[language].firstName}</label>
+              <input
+                id="firstName"
+                type="text"
+                placeholder={translations[language].firstName}
+                className={`border rounded-lg px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-red-500 ${theme === 'dark' ? 'border-gray-700 bg-[#181818] text-white' : 'border-gray-200 bg-white text-black'}`}
+                style={dir === 'rtl' ? { direction: 'rtl' } : {}}
+              />
+            </div>
+            <div>
+              <label className="block mb-2 font-medium" htmlFor="lastName">{translations[language].lastName}</label>
+              <input
+                id="lastName"
+                type="text"
+                placeholder={translations[language].lastName}
+                className={`border rounded-lg px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-red-500 ${theme === 'dark' ? 'border-gray-700 bg-[#181818] text-white' : 'border-gray-200 bg-white text-black'}`}
+                style={dir === 'rtl' ? { direction: 'rtl' } : {}}
+              />
+            </div>
+          </div>
+          <div>
+            <label className="block mb-2 font-medium" htmlFor="email">{translations[language].email}</label>
             <input
-              type="text"
-              placeholder={translations[language].firstName}
-              className={`border rounded-lg px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-red-500 ${theme === 'dark' ? 'border-gray-700 bg-[#181818] text-white' : 'border-gray-200 bg-white text-black'}`}
-              style={dir === 'rtl' ? { direction: 'rtl' } : {}}
-            />
-            <input
-              type="text"
-              placeholder={translations[language].lastName}
+              id="email"
+              type="email"
+              placeholder={translations[language].email}
               className={`border rounded-lg px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-red-500 ${theme === 'dark' ? 'border-gray-700 bg-[#181818] text-white' : 'border-gray-200 bg-white text-black'}`}
               style={dir === 'rtl' ? { direction: 'rtl' } : {}}
             />
           </div>
-          <input
-            type="email"
-            placeholder={translations[language].email}
-            className={`border rounded-lg px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-red-500 ${theme === 'dark' ? 'border-gray-700 bg-[#181818] text-white' : 'border-gray-200 bg-white text-black'}`}
-            style={dir === 'rtl' ? { direction: 'rtl' } : {}}
-          />
-          <input
-            type="tel"
-            placeholder={translations[language].phone}
-            className={`border rounded-lg px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-red-500 ${theme === 'dark' ? 'border-gray-700 bg-[#181818] text-white' : 'border-gray-200 bg-white text-black'}`}
-            style={dir === 'rtl' ? { direction: 'rtl' } : {}}
-          />
-          <textarea
-            rows="5"
-            placeholder={translations[language].message}
-            className={`border rounded-lg px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-red-500 ${theme === 'dark' ? 'border-gray-700 bg-[#181818] text-white' : 'border-gray-200 bg-white text-black'}`}
-            style={dir === 'rtl' ? { direction: 'rtl' } : {}}
-          ></textarea>
+          <div>
+            <label className="block mb-2 font-medium" htmlFor="phone">{translations[language].phone}</label>
+            <input
+              id="phone"
+              type="tel"
+              placeholder={translations[language].phone}
+              className={`border rounded-lg px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-red-500 ${theme === 'dark' ? 'border-gray-700 bg-[#181818] text-white' : 'border-gray-200 bg-white text-black'}`}
+              style={dir === 'rtl' ? { direction: 'rtl' } : {}}
+            />
+          </div>
+          <div>
+            <label className="block mb-2 font-medium" htmlFor="message">{translations[language].message}</label>
+            <textarea
+              id="message"
+              rows="5"
+              placeholder={translations[language].message}
+              className={`border rounded-lg px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-red-500 ${theme === 'dark' ? 'border-gray-700 bg-[#181818] text-white' : 'border-gray-200 bg-white text-black'}`}
+              style={dir === 'rtl' ? { direction: 'rtl' } : {}}
+            ></textarea>
+          </div>
           <button
             type="submit"
             className="w-full bg-red-500 text-white font-semibold py-3 rounded-lg hover:bg-red-600 transition"
@@ -307,13 +324,10 @@ export default function ContactHero() {
 
       <section className={`py-20 ${theme === 'dark' ? 'bg-[#222]' : 'bg-red-50'}`}>
       <div className="max-w-6xl mx-auto px-6">
-        {/* Small heading */}
-        <p className="text-red-900 font-semibold uppercase mb-2" style={dir === 'rtl' ? { direction: 'rtl' } : {}}>
-          {translations[language].location}
-        </p>
+         
 
         {/* Main heading */}
-        <h2 className={`text-3xl md:text-4xl font-extrabold mb-10 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}
+  <h2 className={`text-4xl md:text-5xl font-extrabold mb-10 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}
           style={dir === 'rtl' ? { direction: 'rtl' } : {}}>
           {translations[language].howToReach}
         </h2>
@@ -340,9 +354,7 @@ export default function ContactHero() {
       <div className="max-w-7xl mx-auto px-6 grid  md:grid-cols-2 gap-12 items-center">
         {/* Left: Image and Heading */}
         <div>
-          <p className="text-red-500 font-semibold uppercase mb-2" style={dir === 'rtl' ? { direction: 'rtl' } : {}}>
-            {translations[language].faqSmall}
-          </p>
+           
           <h2 className={`text-4xl md:text-5xl font-extrabold mb-8 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}
             style={dir === 'rtl' ? { direction: 'rtl' } : {}}
             dangerouslySetInnerHTML={{ __html: translations[language].faqTitle }} />
@@ -388,7 +400,7 @@ export default function ContactHero() {
       <section className={`py-20 ${theme === 'dark' ? 'bg-[#222]' : 'bg-red-50'}`}>
       <div className="max-w-4xl mx-auto text-center px-6">
         {/* Heading */}
-        <h2 className={`text-4xl md:text-5xl font-extrabold mb-4 ${theme === 'dark' ? 'text-red-500' : 'text-gray-900'}`}
+  <h2 className={`text-4xl md:text-5xl font-extrabold mb-4 ${theme === 'dark' ? 'text-red-500' : 'text-gray-900'}`}
           style={dir === 'rtl' ? { direction: 'rtl' } : {}}>
           {translations[language].stayUpdated}
         </h2>

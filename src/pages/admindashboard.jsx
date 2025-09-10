@@ -218,85 +218,61 @@ export default function UserDetailsSection() {
 
 
   return (
-
     <div dir={dir} className={clsx(
       "min-h-screen w-full",
       theme === "dark" ? "bg-[#10141c] text-white" : "bg-[#f6fafd] text-[#22223b]"
     )}>
       <Header />
-
-      {/* User Signup Table Section */}
-      <div className={clsx(
-        "rounded-xl shadow p-6 mt-16 bg-white text-black border border-red-500"
-      )}>
-        <h2 className="text-2xl font-bold mb-4 text-red-600">{translations[language].userSignup}</h2>
-        {signupDetails.length > 0 ? (
-          <div className="overflow-x-auto">
-            <table className="min-w-full border rounded-lg border-red-500">
-              <thead className="bg-red-500 text-white">
-                <tr>
-                  <th className="px-4 py-2 text-center">{translations[language].sno}</th>
-                  <th className="px-4 py-2 text-center">{translations[language].firstName}</th>
-                  <th className="px-4 py-2 text-center">{translations[language].lastName}</th>
-                  <th className="px-4 py-2 text-center">{translations[language].email}</th>
-                  <th className="px-4 py-2 text-center">{translations[language].signupTime}</th>
-                  <th className="px-4 py-2 text-center">{translations[language].signupDate}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {signupDetails.map((user, idx) => (
-                  <tr key={user.email || idx} className="border-b border-red-200">
-                    <td className="px-4 py-2 text-center">{idx + 1}</td>
-                    <td className="px-4 py-2 text-center">{user.firstName}</td>
-                    <td className="px-4 py-2 text-center">{user.lastName}</td>
-                    <td className="px-4 py-2 text-center">{user.email}</td>
-                    <td className="px-4 py-2 text-center">{user.signupTime}</td>
-                    <td className="px-4 py-2 text-center">{user.signupDate}</td>
+      <div className="max-w-7xl mx-auto p-6 space-y-12">
+        {/* User Signup Table Section */}
+        <div className={clsx(
+          "rounded-xl shadow p-6 mt-16 bg-white text-black border border-red-500"
+        )}>
+          <h2 className="text-2xl font-bold mb-4 text-red-600">{translations[language].userSignup}</h2>
+          {signupDetails.length > 0 ? (
+            <div className="overflow-x-auto">
+              <table className="min-w-full border rounded-lg border-red-500">
+                <thead className="bg-red-500 text-white">
+                  <tr>
+                    <th className="px-4 py-2 text-center">{translations[language].sno}</th>
+                    <th className="px-4 py-2 text-center">{translations[language].firstName}</th>
+                    <th className="px-4 py-2 text-center">{translations[language].lastName}</th>
+                    <th className="px-4 py-2 text-center">{translations[language].email}</th>
+                    <th className="px-4 py-2 text-center">{translations[language].signupTime}</th>
+                    <th className="px-4 py-2 text-center">{translations[language].signupDate}</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        ) : (
-          <p className="text-gray-500">{translations[language].noUsers}</p>
-        )}
-      </div>
+                </thead>
+                <tbody>
+                  {signupDetails.map((user, idx) => (
+                    <tr key={user.email || idx} className="border-b border-red-200">
+                      <td className="px-4 py-2 text-center">{idx + 1}</td>
+                      <td className="px-4 py-2 text-center">{user.firstName}</td>
+                      <td className="px-4 py-2 text-center">{user.lastName}</td>
+                      <td className="px-4 py-2 text-center">{user.email}</td>
+                      <td className="px-4 py-2 text-center">{user.signupTime}</td>
+                      <td className="px-4 py-2 text-center">{user.signupDate}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <p className="text-gray-500">{translations[language].noUsers}</p>
+          )}
+        </div>
 
-
-  <div className="max-w-7xl mx-auto p-6 space-y-12">
         {/* 1. Revenue Overview */}
         <div className="p-6 rounded-2xl shadow bg-white text-black border border-red-500">
           <h2 className="text-xl font-semibold mb-4 text-red-600">{translations[language].revenue}</h2>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={revenueData}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="day" />
-              <YAxis label={{ value: translations[language].revenue, angle: -90, position: 'insideLeft', fill: '#ef4444', fontSize: 14 }} />
-              <Tooltip 
-                formatter={(value, name) => [value, translations[language].revenue]}
-                labelFormatter={label => label}
-              />
-              <Legend formatter={() => <span style={{ color: '#ef4444' }}>{translations[language].revenue}</span>} />
-              <Line type="monotone" dataKey="revenue" stroke="#ef4444" strokeWidth={3} />
+              <XAxis dataKey="day" label={{ value: 'Day', position: 'insideBottom', offset: -5, fill: '#ef4444', fontSize: 14 }} />
+              <YAxis label={{ value: 'Revenue', angle: -90, position: 'insideLeft', fill: '#ef4444', fontSize: 14 }} />
+              <Tooltip />
+              <Legend formatter={null} />
+              <Line type="monotone" dataKey="revenue" stroke="#ef4444" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
             </LineChart>
-          </ResponsiveContainer>
-        </div>
-
-        {/* 2. Popular Dishes */}
-        <div className="p-6 rounded-2xl shadow bg-white text-black border border-red-500">
-          <h2 className="text-xl font-semibold mb-4 text-red-600">{translations[language].popularDishes}</h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={ordersData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="dish" />
-              <YAxis label={{ value: translations[language].popularDishes, angle: -90, position: 'insideLeft', fill: '#ef4444', fontSize: 14 }} />
-              <Tooltip 
-                formatter={(value, name) => [value, translations[language].popularDishes]}
-                labelFormatter={label => label}
-              />
-              <Legend formatter={() => <span style={{ color: '#ef4444' }}>{translations[language].popularDishes}</span>} />
-              <Bar dataKey="orders" fill="#ef4444" radius={[8, 8, 0, 0]} />
-            </BarChart>
           </ResponsiveContainer>
         </div>
 
@@ -305,7 +281,7 @@ export default function UserDetailsSection() {
           {/* Reservations Trend */}
           <div className="p-6 rounded-2xl shadow bg-white text-black border border-red-500">
             <h2 className="text-xl font-semibold mb-4 text-red-600">{translations[language].reservations}</h2>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={200}>
               <AreaChart data={reservationsData}>
                 <defs>
                   <linearGradient id="colorTables" x1="0" y1="0" x2="0" y2="1">
@@ -313,55 +289,73 @@ export default function UserDetailsSection() {
                     <stop offset="95%" stopColor="#ef4444" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <XAxis dataKey="time" />
-                <YAxis label={{ value: translations[language].reservations, angle: -90, position: 'insideLeft', fill: '#ef4444', fontSize: 14 }} />
+                <XAxis dataKey="time" label={{ value: 'Time', position: 'insideBottom', offset: -5, fill: '#ef4444', fontSize: 14 }} />
+                <YAxis label={{ value: 'Reservations', angle: -90, position: 'insideLeft', fill: '#ef4444', fontSize: 14 }} />
                 <CartesianGrid strokeDasharray="3 3" />
                 <Tooltip 
                   formatter={(value, name) => [value, translations[language].reservations]}
                   labelFormatter={label => label}
                 />
                 <Legend formatter={() => <span style={{ color: '#ef4444' }}>{translations[language].reservations}</span>} />
-                <Area type="monotone" dataKey="tables" stroke="#ef4444" fill="url(#colorTables)" />
+                <Area type="monotone" dataKey="tables" stroke="#ef4444" fillOpacity={1} fill="url(#colorTables)" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
               </AreaChart>
             </ResponsiveContainer>
           </div>
-           
+
           <div className="p-6 rounded-2xl shadow bg-white text-black border border-red-500">
             <h2 className="text-xl font-semibold mb-4 text-red-600">{translations[language].customerGrowth}</h2>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={200}>
               <LineChart data={customersData}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="month" />
-                <YAxis label={{ value: translations[language].customerGrowth, angle: -90, position: 'insideLeft', fill: '#ef4444', fontSize: 14 }} />
+                <XAxis dataKey="month" label={{ value: 'Month', position: 'insideBottom', offset: -5, fill: '#ef4444', fontSize: 14 }} />
+                <YAxis label={{ value: 'Growth', angle: -90, position: 'insideLeft', fill: '#ef4444', fontSize: 14 }} />
                 <Tooltip 
                   formatter={(value, name) => [value, translations[language].customerGrowth]}
                   labelFormatter={label => label}
                 />
                 <Legend formatter={() => <span style={{ color: '#ef4444' }}>{translations[language].customerGrowth}</span>} />
-                <Line type="monotone" dataKey="customers" stroke="#ef4444" strokeWidth={3} />
+                <Line type="monotone" dataKey="customers" stroke="#ef4444" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
               </LineChart>
             </ResponsiveContainer>
           </div>
         </div>
 
-        {/* 6. Deals Performance */}
-        <div className="p-6 rounded-2xl shadow bg-white text-black border border-red-500">
-          <h2 className="text-xl font-semibold mb-4 text-red-600">{translations[language].deals}</h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={dealsData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="deal" />
-              <YAxis label={{ value: translations[language].deals, angle: -90, position: 'insideLeft', fill: '#ef4444', fontSize: 14 }} />
-              <Tooltip 
-                formatter={(value, name) => [value, translations[language].deals]}
-                labelFormatter={label => label}
-              />
-              <Legend formatter={() => <span style={{ color: '#ef4444' }}>{translations[language].deals}</span>} />
-              <Bar dataKey="redemptions" fill="#ef4444" radius={[8, 8, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
+        {/* & 6. Popular Dishes and Deals Performance side by side */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="p-6 rounded-2xl shadow bg-white text-black border border-red-500">
+            <h2 className="text-xl font-semibold mb-4 text-red-600">{translations[language].popularDishes}</h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={ordersData} barSize={75}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="dish" />
+                <YAxis label={{ value: 'Number of Orders', angle: -90, position: 'insideLeft', fill: '#ef4444', fontSize: 14 }} />
+                <Tooltip 
+                  formatter={(value, name) => [value, translations[language].popularDishes]}
+                  labelFormatter={label => label}
+                />
+                <Legend formatter={() => <span style={{ color: '#ef4444' }}>{translations[language].popularDishes}</span>} />
+                <Bar dataKey="orders" fill="#ef4444" radius={[8, 8, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+          <div className="p-6 rounded-2xl shadow bg-white text-black border border-red-500">
+            <h2 className="text-xl font-semibold mb-4 text-red-600">{translations[language].deals}</h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={dealsData} barSize={75}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="deal" />
+                <YAxis label={{ value: 'Number of Times Redeemed', angle: -90, position: 'insideLeft', fill: '#ef4444', fontSize: 14 }} />
+                <Tooltip 
+                  formatter={(value, name) => [value, translations[language].deals]}
+                  labelFormatter={label => label}
+                />
+                <Legend formatter={() => <span style={{ color: '#ef4444' }}>{translations[language].deals}</span>} />
+                <Bar dataKey="redemptions" fill="#ef4444" radius={[8, 8, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         </div>
-      </div>
-     </div>
-  );
+  </div>
+  </div>
+);
 }

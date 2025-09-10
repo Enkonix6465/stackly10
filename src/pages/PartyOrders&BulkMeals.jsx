@@ -328,18 +328,17 @@ const PartyOrdersHero = () => {
           {translations[language].stepsDesc}
         </p>
 
-        <div className="flex flex-wrap justify-center items-center gap-6">
-          {translations[language].steps.map((step, idx) => (
+<div className="flex flex-wrap justify-center items-stretch gap-6 items-center">          {translations[language].steps.map((step, idx) => (
             <div key={idx} className="flex items-center">
-              <div className="flex flex-col hover:scale-105 transition items-center max-w-[200px]">
+              <div className="flex flex-col hover:scale-105 transition items-center max-w-[220px] h-full justify-center text-center">
                 <div className={`rounded-full w-16 h-16 flex items-center justify-center mb-4 shadow-md ${theme === 'dark' ? 'bg-red-700' : 'bg-red-500'}`}> 
                   {stepIcons[idx]}
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
-                <p className={`${theme === 'dark' ? 'text-white' : 'text-gray-600'} text-sm`}>{step.description}</p>
+                <h3 className="text-lg font-semibold mb-2" style={{textAlign:'center'}}>{step.title}</h3>
+                <p className={`${theme === 'dark' ? 'text-white' : 'text-gray-600'} text-sm`} style={{textAlign:'center'}}>{step.description}</p>
               </div>
               {idx < translations[language].steps.length - 1 && (
-                <FaArrowRight size={30} className="text-gray-400 mx-6 hidden md:block" />
+                <FaArrowRight size={30} className="text-gray-400 mx-6 hidden md:block self-center" />
               )}
             </div>
           ))}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import RestaurantFooter from "../components/Footer";
 import home1hero from "../assets/home1hero (1).mp4";
@@ -115,6 +116,24 @@ const translations = {
 };
 
 export default function Home1() {
+  const navigate = useNavigate();
+  // Ref for Discover section
+  const discoverRef = React.useRef(null);
+  // Ref for Explore Menu section
+  const menuRef = React.useRef(null);
+
+  // Scroll handler for Read More
+  const handleReadMore = () => {
+    if (discoverRef.current) {
+      discoverRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+  // Scroll handler for Find Menu
+  const handleFindMenu = () => {
+    if (menuRef.current) {
+      menuRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   const [language, setLanguage] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('selectedLanguage') || 'English';
@@ -199,18 +218,18 @@ export default function Home1() {
             {t.heroDesc}
           </p>
           <div className="flex gap-6">
-            <button className={`relative border border-white text-white px-8 py-3 rounded-lg text-lg font-serif flex items-center group bg-transparent hover:bg-white/10 transition ${theme === 'dark' ? '' : ''}`}>
+            <button onClick={handleReadMore} className={`relative border border-white text-white px-8 py-3 rounded-lg text-lg font-serif flex items-center group bg-transparent hover:bg-white/10 transition ${theme === 'dark' ? '' : ''}`}>
               {t.readMore}
               <span className="ml-3 w-8 h-0.5 bg-white block group-hover:bg-red-500 transition-all"></span>
             </button>
-            <button className={`font-semibold px-8 py-3 rounded-lg text-lg shadow transition ${theme === 'dark' ? 'bg-white/90 hover:bg-white text-red-700' : 'bg-white/90 hover:bg-white text-red-700'}`}> 
+            <button onClick={handleFindMenu} className={`font-semibold px-8 py-3 rounded-lg text-lg shadow transition ${theme === 'dark' ? 'bg-white/90 hover:bg-white text-red-700' : 'bg-white/90 hover:bg-white text-red-700'}`}> 
               {t.findMenu}
             </button>
           </div>
         </div>
       </section>
       {/* About/Feature Section */}
-  <section className={`relative w-full py-16 px-4 md:px-0 flex flex-col items-center justify-center z-10 ${theme === 'dark' ? 'bg-[#181818]' : 'bg-white/90'}`}>
+  <section ref={discoverRef} className={`relative w-full py-16 px-4 md:px-0 flex flex-col items-center justify-center z-10 ${theme === 'dark' ? 'bg-[#181818]' : 'bg-white/90'}`}>
         <div className="max-w-6xl w-full mx-auto grid  md:grid-cols-2 gap-10 items-stretch">
           {/* Left: Video */}
           <div className="w-full flex justify-center items-center min-h-[340px] h-full">
@@ -236,7 +255,7 @@ export default function Home1() {
       </section>
 
       {/* Explore Menu Section */}
-  <section className={`w-full py-16 px-4 md:px-0 flex flex-col items-center justify-center ${theme === 'dark' ? 'bg-[#222]' : 'bg-red-50'}`}> 
+  <section ref={menuRef} className={`w-full py-16 px-4 md:px-0 flex flex-col items-center justify-center ${theme === 'dark' ? 'bg-[#222]' : 'bg-red-50'}`}> 
         <div className="max-w-6xl w-full mx-auto">
           <h2 className={`text-3xl md:text-4xl font-bold mb-10 font-serif text-center ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{t.menuTitle}</h2>
           <div className="grid  sm:grid-cols-2 md:grid-cols-4 gap-8">
@@ -353,7 +372,13 @@ export default function Home1() {
         <div className="max-w-3xl w-full mx-auto flex flex-col items-center justify-center">
           <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-4" style={{color: 'red'}}>{t.readyGrow}</h2>
           <p className={`text-lg text-center mb-8 ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}>{t.readyDesc}</p>
-          <a href="#get-started" className="mt-2 px-10 py-4 rounded-full text-white font-semibold text-lg shadow-lg transition bg-red-500" style={{boxShadow:'0 4px 24px 0 rgba(139,92,246,0.15)'}}>{t.getStarted}</a>
+          <button
+            onClick={() => navigate('/contactus')}
+            className="mt-2 px-10 py-4 rounded-full text-white font-semibold text-lg shadow-lg transition bg-red-500"
+            style={{boxShadow:'0 4px 24px 0 rgba(139,92,246,0.15)'}}
+          >
+            {t.getStarted}
+          </button>
         </div>
       </section>
       

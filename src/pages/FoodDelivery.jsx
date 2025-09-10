@@ -331,6 +331,30 @@ const FoodDeliveryHero = () => {
           ))}
         </div>
       </section>
+      {/* Testimonials Section */}
+  <section className={`py-10 px-4 ${sectionAltBg}`}> 
+        <div className="grid items-center max-w-6xl gap-8 mx-auto md:grid-cols-2">
+          <div className="text-center md:text-left">
+            <h2 className="text-4xl font-bold mb-6 text-black dark:text-white" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
+              {translations[language].testimonialsTitle}
+            </h2>
+            <div className={`rounded-2xl p-8 shadow-lg ${cardBg}`}>
+              <p className="mb-6 text-lg italic" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
+                "{testimonial.text}"
+              </p>
+              <h3 className="text-xl font-semibold">{testimonial.name}</h3>
+              <p className="text-sm text-red-500">{testimonial.role}</p>
+            </div>
+            <div className="flex justify-center gap-4 mt-6 md:justify-start">
+              <button onClick={prevTestimonial} className="p-3 text-white transition bg-red-500 rounded-full hover:bg-red-600"><FaArrowLeft /></button>
+              <button onClick={nextTestimonial} className="p-3 text-white transition bg-red-500 rounded-full hover:bg-red-600"><FaArrowRight /></button>
+            </div>
+          </div>
+          <div className="flex justify-center">
+            <img src={food} alt="Delicious food" className="rounded-2xl shadow-lg w-full max-w-md h-[350px] w-[500px] object-cover" />
+          </div>
+        </div>
+      </section>
 
       {/* Pricing Section */}
   <section className={`py-20 px-6 ${pricingBg} text-center`} id="pricing">
@@ -372,31 +396,7 @@ const FoodDeliveryHero = () => {
           ))}
         </div>
       </section>
-
-      {/* Testimonials Section */}
-  <section className={`py-10 px-4 ${sectionAltBg}`}> 
-        <div className="grid items-center max-w-6xl gap-8 mx-auto md:grid-cols-2">
-          <div className="text-center md:text-left">
-            <h2 className="text-4xl font-bold mb-6 text-black dark:text-white" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
-              {translations[language].testimonialsTitle}
-            </h2>
-            <div className={`rounded-2xl p-8 shadow-lg ${cardBg}`}>
-              <p className="mb-6 text-lg italic" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
-                "{testimonial.text}"
-              </p>
-              <h3 className="text-xl font-semibold">{testimonial.name}</h3>
-              <p className="text-sm text-red-500">{testimonial.role}</p>
-            </div>
-            <div className="flex justify-center gap-4 mt-6 md:justify-start">
-              <button onClick={prevTestimonial} className="p-3 text-white transition bg-red-500 rounded-full hover:bg-red-600"><FaArrowLeft /></button>
-              <button onClick={nextTestimonial} className="p-3 text-white transition bg-red-500 rounded-full hover:bg-red-600"><FaArrowRight /></button>
-            </div>
-          </div>
-          <div className="flex justify-center">
-            <img src={food} alt="Delicious food" className="rounded-2xl shadow-lg w-full max-w-md h-[350px] w-[500px] object-cover" />
-          </div>
-        </div>
-      </section>
+ 
 
       {/* Call to Action Section */}
       <section className="relative px-6 py-24 text-white md:px-20">

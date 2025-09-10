@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ImpactSection from "../components/ImpactSection";
 import chef1 from "../assets/chef1.jpg";
 import chef2 from "../assets/chef2.jpg";
@@ -29,7 +30,7 @@ const translations = {
       "Established in 1985, serving generations of food lovers",
       "Family-owned and operated with pride",
       "Honoring traditional recipes with a modern twist",
-      "Recognized for excellence in taste and service",
+      "Recognized for excellence in taste and service"
     ],
     heritageBtn: "Learn More",
     professionalsTitle: "Meet Our Professionals",
@@ -52,7 +53,7 @@ const translations = {
     ctaTitle: "Reserve Your Table or Order Online!",
     ctaDesc: "Experience gourmet dining, chef’s specials, and unforgettable evenings at Foodify. Book your table for a special night or order your favorite dishes for home delivery. We’re here to delight your taste buds—every day!",
     reserveBtn: "Reserve a Table",
-    orderBtn: "Order Online",
+    orderBtn: "Order Online"
   },
   Arabic: {
     heroTitle: "اختبر تجربة الطعام الفاخر في فوديفاي",
@@ -131,6 +132,15 @@ const translations = {
 };
 
 export default function Home2() {
+  const chefRef = React.useRef(null);
+  const navigate = useNavigate();
+
+  // Scroll handler for Read More
+  const handleReadMore = () => {
+    if (chefRef.current) {
+      chefRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   const [language, setLanguage] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('selectedLanguage') || 'English';
@@ -148,44 +158,14 @@ export default function Home2() {
     const handleLanguageChange = () => {
       setLanguage(localStorage.getItem('selectedLanguage') || 'English');
     };
-    const handleThemeChange = () => {
-      setTheme(localStorage.getItem('theme') || 'light');
-    };
-    window.addEventListener('language-changed', handleLanguageChange);
-    window.addEventListener('storage', handleLanguageChange);
-    window.addEventListener('theme-changed', handleThemeChange);
-    window.addEventListener('storage', handleThemeChange);
-    return () => {
-      window.removeEventListener('language-changed', handleLanguageChange);
-      window.removeEventListener('storage', handleLanguageChange);
-      window.removeEventListener('theme-changed', handleThemeChange);
-      window.removeEventListener('storage', handleThemeChange);
-    };
+    // ...existing effect logic...
   }, []);
-
-  const t = translations[language] || translations.English;
-  const isRTL = language === 'Arabic' || language === 'Hebrew';
-
-  // Theme toggle handler
-  const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('theme', newTheme);
-      window.dispatchEvent(new Event('theme-changed'));
-    }
-  };
 
   return (
     <div
       className={`flex flex-col min-h-screen ${theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'}`}
       dir={isRTL ? 'rtl' : 'ltr'}
     >
-      {/* Pricing Section (moved from FoodDelivery) */}
-      <section className="py-20 px-6 text-center" id="pricing">
-        <h2 className="text-4xl font-bold text-red-500 mb-4">Our Pricing</h2>
-        <p className="max-w-2xl mx-auto mb-12">Choose a plan that fits your appetite. Upgrade anytime — no hidden fees!</p>
-      </section>
       {/* Theme Toggle Button */}
       <button
         onClick={toggleTheme}
@@ -195,196 +175,68 @@ export default function Home2() {
         {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
       </button>
 
-      
-			
-			{/* Hero Section */}
-      <section className={`relative flex flex-col items-center justify-center h-screen w-full overflow-hidden ${theme === 'dark' ? 'bg-black' : ''}`}>
-        {/* Background Video for Hero Only */}
-        <video
-          className="absolute inset-0 w-full h-full object-cover z-0 brightness-110"
-          src={home2hero}
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
-        {/* Overlay for readability */}
-        <div className={`absolute inset-0 z-10 ${theme === 'dark' ? 'bg-black/70' : 'bg-black/50'}`} />
-        <div className="relative z-20 flex flex-col items-center justify-center h-full w-full">
-           <h1 className={`text-5xl md:text-6xl font-serif font-bold text-center mb-4 drop-shadow-lg ${theme === 'dark' ? 'text-white' : 'text-white'}`}>
-             {t.heroTitle}
-           </h1>
-           <p className={`text-lg md:text-xl text-center mb-8 max-w-2xl drop-shadow ${theme === 'dark' ? 'text-white/90' : 'text-white/90'}`}>
-             {t.heroDesc}
-           </p>
-           <button className={`relative border border-white text-white px-8 py-3 rounded-lg text-lg font-serif flex items-center group bg-transparent hover:bg-white/10 transition ${theme === 'dark' ? '' : ''}`}>
-             {t.readMore}
-             <span className="ml-3 w-8 h-0.5 bg-white block group-hover:bg-red-500 transition-all"></span>
-           </button>
-        </div>
-      </section>
-
-      			{/* Chef’s Specials Gallery Section */}
-      			<section className={`w-full py-16 px-4 md:px-0 flex flex-col items-center justify-center ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
-        <div className="max-w-6xl w-full mx-auto">
-          <h2 className={`text-3xl md:text-4xl font-bold mb-10 font-serif text-center ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-            {t.specialsTitle}
-          </h2>
-
-          <div className="grid  sm:grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { img: special1, title: t.specials[0] },
-              { img: special2, title: t.specials[1] },
-              { img: special3, title: t.specials[2] },
-              { img: special4, title: t.specials[3] },
-            ].map((dish, index) => (
-              <div
-                key={index}
-                className={`rounded-lg shadow-lg overflow-hidden hover:scale-105 transform transition duration-300 ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}
-              >
-                <img
-                  src={dish.img}
-                  alt={dish.title}
-                  className="w-full h-80 object-cover"
-                />
-                <div className="p-4 text-center">
-                  <span className={`text-lg font-serif ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{dish.title}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
-                 <section className={`w-full py-20 px-4 md:px-0 flex flex-col items-center justify-center ${theme === 'dark' ? 'bg-black' : 'bg-red-50'}`}>
-        <div className="max-w-6xl w-full mx-auto grid  md:grid-cols-2 gap-10 items-center">
-          {/* Left: Heritage Image */}
-          <div className="w-full h-full min-h-[340px]">
-            <img
-              src={heritage}
-              alt="Heritage & Legacy"
-              className="rounded-2xl shadow-lg w-full h-full min-h-[260px] object-cover"
-            />
-          </div>
-
-          {/* Right: Content */}
-          <div className="grid gap-4 h-full min-h-[340px] content-center">
-            <h2 className={`text-3xl md:text-4xl font-bold font-serif ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-              {t.heritageTitle}
-            </h2>
-            <p className={`text-lg max-w-lg ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
-              {t.heritageDesc}
-            </p>
-            <ul className={`space-y-2 ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
-              {t.heritageList.map((item, i) => <li key={i}>{item}</li>)}
-            </ul>
-            <button className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition">
-              {t.heritageBtn}
-            </button>
-          </div>
-        </div>
-      </section>
-
-
-			{/* Meet Our Professionals Section */}
-      <section className={`w-full py-20 px-4 md:px-0 flex flex-col items-center justify-center ${theme === 'dark' ? 'bg-[#222]' : 'bg-red-50'}`}>
-  <h2 className={`text-5xl md:text-6xl font-serif font-bold text-center mb-16 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.professionalsTitle}</h2>
-				<div className="max-w-6xl w-full mx-auto grid  md:grid-cols-3 gap-12">
-					{/* Chef 1 */}
-					<div className="flex flex-col items-center">
-						<img src={chef1} alt="Gordon Ramsay" className="w-full h-96 object-cover rounded-lg shadow-lg mb-6" />
+      {/* Meet Our Professionals Section */}
+      <section className={`w-full py-20 px-4 md:px-0 flex flex-col items-center justify-center ${theme === 'dark' ? 'bg-[#222]' : 'bg-red-50'}`} ref={chefRef}>
+        <h2 className={`text-5xl md:text-6xl font-serif font-bold text-center mb-16 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.professionalsTitle}</h2>
+        <div className="max-w-6xl w-full mx-auto grid md:grid-cols-3 gap-12">
+          <div className="flex flex-col items-center">
+            <img src={chef1} alt="Gordon Ramsay" className="w-full h-96 object-cover rounded-lg shadow-lg mb-6" />
             <h3 className={`text-2xl font-serif font-semibold mb-1 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.chef1}</h3>
             <span className={`text-lg font-serif mb-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.chefRole}</span>
-					</div>
-					{/* Chef 2 with social icons */}
-					<div className="flex flex-col items-center relative">
-						<img src={chef3} alt="Dominique Crenn" className="w-full h-96 object-cover rounded-lg shadow-lg mb-6" />
-						{/* Social icons */}
-						<div className="absolute left-4 top-10 flex flex-col gap-4 z-10">
-							<a href="#" className="text-white hover:text-yellow-300 text-2xl"><i className="fab fa-twitter"></i></a>
-							<a href="#" className="text-white hover:text-yellow-300 text-2xl"><i className="fab fa-facebook"></i></a>
-							<a href="#" className="text-white hover:text-yellow-300 text-2xl"><i className="fab fa-instagram"></i></a>
-							<a href="#" className="text-white hover:text-yellow-300 text-2xl"><i className="fab fa-whatsapp"></i></a>
-						</div>
+          </div>
+          <div className="flex flex-col items-center relative">
+            <img src={chef3} alt="Dominique Crenn" className="w-full h-96 object-cover rounded-lg shadow-lg mb-6" />
+            <div className="absolute left-4 top-10 flex flex-col gap-4 z-10">
+              <a href="#" className="text-white hover:text-yellow-300 text-2xl"><i className="fab fa-twitter"></i></a>
+              <a href="#" className="text-white hover:text-yellow-300 text-2xl"><i className="fab fa-facebook"></i></a>
+              <a href="#" className="text-white hover:text-yellow-300 text-2xl"><i className="fab fa-instagram"></i></a>
+              <a href="#" className="text-white hover:text-yellow-300 text-2xl"><i className="fab fa-whatsapp"></i></a>
+            </div>
             <h3 className={`text-2xl font-serif font-semibold mb-1 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.chef2}</h3>
             <span className={`text-lg font-serif mb-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.chefRole}</span>
-					</div>
-					{/* Chef 3 */}
-					<div className="flex flex-col items-center">
-						<img src={chef2} alt="Auguste Escoffier" className="w-full h-96 object-cover rounded-lg shadow-lg mb-6" />
+          </div>
+          <div className="flex flex-col items-center">
+            <img src={chef2} alt="Auguste Escoffier" className="w-full h-96 object-cover rounded-lg shadow-lg mb-6" />
             <h3 className={`text-2xl font-serif font-semibold mb-1 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.chef3}</h3>
             <span className={`text-lg font-serif mb-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.chefRole}</span>
-					</div>
-				</div>
-			</section>
+          </div>
+        </div>
+      </section>
 
-			{/* Live Events & Dining Nights Section */}
+      {/* Live Events & Dining Nights Section */}
       <section className={`w-full py-20 px-4 md:px-0 flex flex-col items-center justify-center ${theme === 'dark' ? 'bg-[#222]' : 'bg-red-50'}`}>
-  <div className="max-w-6xl w-full mx-auto">
-  <h2 className={`text-3xl md:text-4xl font-bold mb-10 font-serif text-center ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-      {t.eventsTitle}
-    </h2>
+        <div className="max-w-6xl w-full mx-auto">
+          <h2 className={`text-3xl md:text-4xl font-bold mb-10 font-serif text-center ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{t.eventsTitle}</h2>
+          <div className="grid md:grid-cols-3 gap-8 items-stretch">
+            <div className={`grid gap-4 rounded-lg shadow-lg p-6 text-center ${theme === 'dark' ? 'bg-[#181818]' : 'bg-white'}`}>
+              <img src={buffet1} alt="Music Night" className="w-full h-56 object-cover rounded" />
+              <span className={`text-lg font-serif font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{t.musicNights}</span>
+            </div>
+            <div className={`grid gap-4 rounded-lg shadow-lg p-8 border-2 text-center ${theme === 'dark' ? 'bg-[#222] border-[#333]' : 'bg-red-50 border-red-200'}`}>
+              <h3 className="text-2xl font-serif font-bold text-red-600">{t.eventsCardTitle}</h3>
+              <p className={` ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}>{t.eventsCardDesc}</p>
+              <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}>{t.eventsList.map((item, i) => <li key={i}>{item}</li>)}</ul>
+              <button className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition">{t.eventsBtn}</button>
+            </div>
+            <div className={`grid gap-4 rounded-lg shadow-lg p-6 text-center ${theme === 'dark' ? 'bg-[#181818]' : 'bg-white'}`}>
+              <img src={buffet2} alt="Buffet Theme" className="w-full h-56 object-cover rounded" />
+              <span className={`text-lg font-serif font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{t.buffetThemes}</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <div className="grid  md:grid-cols-3 gap-8 items-stretch">
-      {/* Left Card: Music Night */}
-  <div className={`grid gap-4 rounded-lg shadow-lg p-6 text-center ${theme === 'dark' ? 'bg-[#181818]' : 'bg-white'}`}> 
-        <img
-          src={buffet1}
-          alt="Music Night"
-          className="w-full h-56 object-cover rounded"
-        />
-  <span className={`text-lg font-serif font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-          {t.musicNights}
-        </span>
-      </div>
-
-      {/* Middle Card: Info */}
-  <div className={`grid gap-4 rounded-lg shadow-lg p-8 border-2 text-center ${theme === 'dark' ? 'bg-[#222] border-[#333]' : 'bg-red-50 border-red-200'}`}> 
-  <h3 className="text-2xl font-serif font-bold text-red-600">
-          {t.eventsCardTitle}
-        </h3>
-  <p className={` ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}> 
-          {t.eventsCardDesc}
-        </p>
-  <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}> 
-          {t.eventsList.map((item, i) => <li key={i}>{item}</li>)}
-        </ul>
-  <button className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition">
-          {t.eventsBtn}
-        </button>
-      </div>
-
-      {/* Right Card: Buffet Theme */}
-  <div className={`grid gap-4 rounded-lg shadow-lg p-6 text-center ${theme === 'dark' ? 'bg-[#181818]' : 'bg-white'}`}> 
-        <img
-          src={buffet2}
-          alt="Buffet Theme"
-          className="w-full h-56 object-cover rounded"
-        />
-  <span className={`text-lg font-serif font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-          {t.buffetThemes}
-        </span>
-      </div>
-    </div>
-  </div>
-</section>
-
-			
-			{/* Meet Our Professionals Section */}
-			
-			{/* CTA Section */}
-  <section className={`w-full py-16 px-4 md:px-0 flex flex-col items-center justify-center ${theme === 'dark' ? 'bg-[#181818]' : 'bg-white'}`}>
-				<div className="max-w-3xl w-full mx-auto flex flex-col items-center justify-center">
+      {/* CTA Section */}
+      <section className={`w-full py-16 px-4 md:px-0 flex flex-col items-center justify-center ${theme === 'dark' ? 'bg-[#181818]' : 'bg-white'}`}>
+        <div className="max-w-3xl w-full mx-auto flex flex-col items-center justify-center">
           <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-4 text-red-600">{t.ctaTitle}</h2>
           <p className={`text-lg text-center mb-8 ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}>{t.ctaDesc}</p>
           <div className="flex flex-row sm:flex-row gap-4">
-            <a href="#reserve" className="px-10 py-4 rounded-full text-white font-semibold text-lg shadow-lg transition bg-red-600 hover:bg-red-700">{t.reserveBtn}</a>
-            <a href="#order" className={`px-10 py-4 rounded-full font-semibold text-lg shadow-lg transition border ${theme === 'dark' ? 'text-red-400 bg-[#181818] border-red-400 hover:bg-[#222]' : 'text-red-600 bg-white border-red-600 hover:bg-red-100'}`}>{t.orderBtn}</a>
+            <button onClick={() => navigate('/contactus')} className="px-10 py-4 rounded-full text-white font-semibold text-lg shadow-lg transition bg-red-600 hover:bg-red-700">{t.reserveBtn}</button>
+            <button onClick={() => navigate('/contactus')} className={`px-10 py-4 rounded-full font-semibold text-lg shadow-lg transition border ${theme === 'dark' ? 'text-red-400 bg-[#181818] border-red-400 hover:bg-[#222]' : 'text-red-600 bg-white border-red-600 hover:bg-red-100'}`}>{t.orderBtn}</button>
           </div>
-				</div>
-			</section>
-			
-		</div>
-	);
+        </div>
+      </section>
+    </div>
+  );
 }

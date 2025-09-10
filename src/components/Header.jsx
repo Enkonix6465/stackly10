@@ -103,6 +103,22 @@ const Header = () => {
     return 'English';
   });
   const [language, setLanguage] = useState(langMap[selectedLanguage] || 'en');
+
+  // Close avatar dropdown when clicking outside
+  useEffect(() => {
+    if (!isAvatarDropdownOpen) return;
+    const handleClickOutside = (event) => {
+      const dropdown = document.getElementById('avatar-dropdown');
+      const avatarBtn = document.getElementById('avatar-btn');
+      if (dropdown && !dropdown.contains(event.target) && avatarBtn && !avatarBtn.contains(event.target)) {
+        setIsAvatarDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isAvatarDropdownOpen]);
   // Ensure theme is set only after mount (SSR-safe)
   // Language change handler (stub, you can add i18n logic here)
   const handleLanguageChange = (lang) => {
@@ -359,13 +375,14 @@ const Header = () => {
   return (
     <>
                     <button
+                      id="avatar-btn"
                       className="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center text-white font-semibold focus:outline-none"
                       onClick={() => setIsAvatarDropdownOpen((v) => !v)}
                     >
                       {initials}
                     </button>
                     {isAvatarDropdownOpen && (
-                      <div className={`absolute right-0 mt-2 w-40 rounded-md shadow-lg border py-2 z-50 ${theme === 'dark' ? 'bg-[#1E2A38] border-[#141B25]' : 'bg-white border-gray-200'}`}> 
+                      <div id="avatar-dropdown" className={`absolute right-0 mt-2 w-40 rounded-md shadow-lg border py-2 z-50 ${theme === 'dark' ? 'bg-[#1E2A38] border-[#141B25]' : 'bg-white border-gray-200'}`}> 
                         {email === 'admin@enkonix.in' && (
                           <button
                             className={`block w-full text-left px-4 py-2 ${theme === 'dark' ? 'text-white hover:bg-red-500' : 'text-gray-800 hover:bg-blue-100'}`}

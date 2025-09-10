@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 // Translation object for all footer text
 const translations = {
   en: {
-    brand: 'Delighting Your Taste Buds, Every Day!',
+    brand: 'Delighting Your tastebuds, Every Day!',
     quickLinks: 'Quick Links',
     home: 'Home',
     about: 'About Us',

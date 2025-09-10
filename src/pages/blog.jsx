@@ -501,7 +501,7 @@ export default function BlogHero() {
       <section className={`py-16 ${theme === 'dark' ? 'bg-[#222]' : 'bg-red-50'}`}>
         <div className="max-w-7xl mx-auto px-6">
           {/* Heading */}
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12" style={{ color: '#ef4444' }}>
             {translations[language].featured}
           </h2>
 
@@ -550,7 +550,7 @@ export default function BlogHero() {
         <div className="max-w-7xl mx-auto px-6 grid  md:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#ef4444' }}>
               {translations[language].categories}
             </h2>
             <p className={`text-lg mb-6 ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}
@@ -589,7 +589,7 @@ export default function BlogHero() {
       <section className={`py-16 ${theme === 'dark' ? 'bg-[#222]' : 'bg-red-50'}`}>
       <div className="max-w-7xl mx-auto px-6">
         {/* Heading */}
-            <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-center mb-12" style={{ color: '#ef4444' }}>
               {translations[language].serviceComparison}
             </h2>
 
@@ -636,7 +636,7 @@ export default function BlogHero() {
   <section className={`py-16 ${theme === 'dark' ? 'bg-[#181818]' : 'bg-[#fff]'}`}>
     <div className="max-w-6xl mx-auto px-6">
       {/* Heading */}
-      <h2 className="text-4xl md:text-5xl font-bold text-center mb-12" style={{ color: '#ef4444' }}>
+  <h2 className="text-4xl md:text-5xl font-bold text-center mb-12" style={{ color: '#ef4444' }}>
         {translations[language].myths}
       </h2>
 
@@ -661,7 +661,7 @@ export default function BlogHero() {
 
     {/* Cooking Tips Section */}
     <div className={`py-10 ${theme === 'dark' ? 'bg-[#000]' : 'bg-red-50'}`}>
-      <h2 className={`text-3xl font-bold text-center mb-8 ${theme === 'dark' ? 'text-white' : 'text-black'}`} style={dir === 'rtl' ? { direction: 'rtl' } : {}}>
+  <h2 className={`text-4xl md:text-5xl font-bold text-center mb-8`} style={{ color: '#ef4444', ...(dir === 'rtl' ? { direction: 'rtl' } : {}) }}>
         {translations[language].tipsTitle}
       </h2>
       <div className="grid  md:grid-cols-2 gap-6 max-w-4xl mx-auto ">

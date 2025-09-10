@@ -405,9 +405,9 @@ export default function LoginPage() {
         )}
         {/* Only show Register and Forgot Password for login form, else show Back to Login */}
         {form === "login" && (
-          <div className="flex justify-between mt-4 text-sm">
+          <div className="flex justify-between mt-4">
             <button
-              className="text-red-300 hover:underline"
+              className="text-red-300 hover:underline text-2xl font-bold"
               onClick={() => {
                 setForm("register");
                 setError("");
