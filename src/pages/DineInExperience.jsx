@@ -38,7 +38,7 @@ const translations = {
     stepsTitle: "How It Works",
     stepsDesc: "Dining with us is effortless and enjoyable from start to finish.",
     steps: [
-      { title: "Reserve Your Table", description: "Book online or call to choose your preferred time and seating." },
+      { title: "Reserve Your Table", description: "Book in online or call to choose the your preferred time and seating." },
       { title: "Arrive and Relax", description: "Step into a welcoming atmosphere designed for your comfort." },
       { title: "Enjoy Your Meal", description: "Indulge in gourmet dishes crafted to perfection by our chefs." },
     ],
@@ -209,7 +209,7 @@ const DineInExperienceHero = () => {
         </button>
       </div>
       {/* Hero Section */}
-  <section className="relative w-full h-screen overflow-hidden">
+  <section className="relative w-full h-[85vh] overflow-hidden">
         <video
           className="absolute top-0 left-0 w-full h-full object-cover"
           src={dineVideo}
@@ -232,18 +232,18 @@ const DineInExperienceHero = () => {
   {/* About Section */}
   <section className={`py-20 px-6 md:px-20 ${sectionAltBg}`}> 
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Left Image */}
-          <div>
+          {/* Left Image - balanced height */}
+          <div className="w-full md:w-1/2 flex justify-center items-center min-h-[340px] h-full">
             <img
               src={dine1}
               alt="Our Dine-In Experience"
-              className="w-full h-auto rounded-2xl shadow-lg"
+              className="w-full md:max-w-full md:h-[340px] max-w-md h-full object-cover rounded-2xl shadow-lg"
             />
           </div>
 
-          {/* Right Content */}
-          <div>
-            <h2 className="text-4xl font-bold mb-6" style={dir === 'rtl' ? {textAlign:'right'} : {}}>
+          {/* Right Content - balanced height */}
+          <div className="w-full md:w-1/2 flex flex-col items-start justify-center min-h-[340px] h-full md:pl-8 text-justify">
+            <h2 className="text-4xl font-bold text-red-500 mb-6" style={dir === 'rtl' ? {textAlign:'right'} : {}}>
               {translations[language].aboutTitle}
             </h2>
             {translations[language].about.map((p, i) => (

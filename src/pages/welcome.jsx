@@ -76,7 +76,7 @@ const translations = {
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUser, FaLock } from "react-icons/fa";
-import bgImage from "../assets/welcome.jpg.jpg";
+import bgImage from "../assets/welcome.png";
 import logoImage from "../assets/logo.png";
 
 // Language dropdown options
@@ -243,12 +243,19 @@ export default function LoginPage() {
         </select>
       </div>
       {/* Logo in top left */}
-      <img
-        src={logoImage}
-        alt="Stackly Logo"
-        className="h-16 absolute top-6 left-6 z-10 bg-white bg-opacity-80 rounded-full p-2 shadow-lg"
-        style={{ objectFit: "contain" }}
-      />
+      <button
+        type="button"
+        className="absolute top-6 left-6 z-10"
+        style={{ border: 'none', padding: 0, background: 'none' }}
+        aria-label="Logo"
+      >
+        <img
+          src={logoImage}
+          alt="Stackly Logo"
+          className="h-16 bg-white bg-opacity-80 rounded-full p-2 shadow-lg"
+          style={{ objectFit: "contain" }}
+        />
+      </button>
   <div className="bg-red-500 bg-opacity-40 w-full max-w-md mx-4 rounded-2xl shadow-lg flex flex-col items-center">
   <h2 className="text-4xl font-light text-white mb-8 mt-2 tracking-wide">{translations[selectedLanguage].welcome}</h2>
         {message && (
@@ -287,7 +294,7 @@ export default function LoginPage() {
             </button>
             <div className="flex justify-end mt-2 text-sm">
               <button
-                className="text-gray-200 hover:underline"
+                className="text-white hover:underline"
                 type="button"
                 onClick={() => setForm("forgot")}
               >
@@ -407,7 +414,7 @@ export default function LoginPage() {
         {form === "login" && (
           <div className="flex justify-between mt-4">
             <button
-              className="text-red-300 hover:underline text-2xl font-bold"
+              className="text-white hover:underline text-2xl font-bold"
               onClick={() => {
                 setForm("register");
                 setError("");
@@ -422,7 +429,7 @@ export default function LoginPage() {
         {form !== "login" && (
           <div className="flex justify-center mt-4 text-sm">
             <button
-              className="text-red-300 hover:underline"
+              className="text-white hover:underline"
               onClick={() => {
                 setForm("login");
                 setError("");

@@ -193,7 +193,7 @@ export default function Home1() {
         {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
       </button>
       {/* Hero Section */}
-  <section className={`relative flex flex-col items-center justify-center h-screen w-full overflow-hidden ${theme === 'dark' ? 'bg-black' : ''}`}>
+  <section className={`relative flex flex-col items-center justify-center h-[93vh] w-full overflow-hidden ${theme === 'dark' ? 'bg-black' : ''}`}>
         {/* Background Video for Hero Only */}
         <video
           className="absolute inset-0 w-full h-full object-cover z-0 brightness-110"
@@ -231,20 +231,20 @@ export default function Home1() {
       {/* About/Feature Section */}
   <section ref={discoverRef} className={`relative w-full py-16 px-4 md:px-0 flex flex-col items-center justify-center z-10 ${theme === 'dark' ? 'bg-[#181818]' : 'bg-white/90'}`}>
         <div className="max-w-6xl w-full mx-auto grid  md:grid-cols-2 gap-10 items-stretch">
-          {/* Left: Video */}
-          <div className="w-full flex justify-center items-center min-h-[340px] h-full">
+          {/* Left: Video/Image - larger on tablet */}
+          <div className="w-full md:w-1/2 flex justify-center items-center min-h-[340px] h-full">
             <video
               src={home1about}
-              className="rounded-2xl shadow-lg w-full max-w-md h-full min-h-[260px] object-cover"
+              className="rounded-2xl shadow-lg w-full md:max-w-full md:h-[340px] max-w-md h-full min-h-[260px] object-cover"
               autoPlay
               loop
               muted
               playsInline
             />
           </div>
-          {/* Right: Content */}
-          <div className="flex flex-col items-start justify-center min-h-[340px] h-full">
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 font-serif ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{t.aboutTitle}</h2>
+          {/* Right: Content - balanced width */}
+          <div className="w-full md:w-1/2 flex flex-col items-start justify-center min-h-[340px] h-full md:pl-8">
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 font-serif text-red-500`}>{t.aboutTitle}</h2>
             <p className={`text-lg mb-6 max-w-lg ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}>{t.aboutDesc}</p>
             <ul className={`mb-6 space-y-2 ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}>
               {t.aboutList.map((item, i) => <li key={i}>{item}</li>)}
@@ -257,7 +257,7 @@ export default function Home1() {
       {/* Explore Menu Section */}
   <section ref={menuRef} className={`w-full py-16 px-4 md:px-0 flex flex-col items-center justify-center ${theme === 'dark' ? 'bg-[#222]' : 'bg-red-50'}`}> 
         <div className="max-w-6xl w-full mx-auto">
-          <h2 className={`text-3xl md:text-4xl font-bold mb-10 font-serif text-center ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{t.menuTitle}</h2>
+          <h2 className={`text-3xl md:text-4xl font-bold mb-10 font-serif text-center text-red-500`}>{t.menuTitle}</h2>
           <div className="grid  sm:grid-cols-2 md:grid-cols-4 gap-8">
             {/* Menu Card 1 */}
             <div className="flex flex-col items-center">
@@ -289,7 +289,7 @@ export default function Home1() {
           <div className="text-center mb-2">
             <span className="text-lg text-red-600 font-serif italic tracking-wide">{t.whyChooseUs}</span>
           </div>
-          <h2 className={`text-5xl md:text-6xl font-serif font-bold text-center mb-12 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.whyChooseUs}</h2>
+          <h2 className={`text-5xl md:text-6xl font-serif font-bold text-center mb-12 text-red-500`}>{t.whyChooseUs}</h2>
           <div className="grid  md:grid-cols-3 gap-10">
             {/* Card 1 */}
             <div className={`bg-transparent border border-red-600 rounded-none p-10 flex flex-col items-center text-center transition-all ${theme === 'dark' ? 'text-white' : 'text-black'}`}> 

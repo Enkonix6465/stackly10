@@ -250,7 +250,7 @@ const ServicesPage = () => {
       </button>
 
       {/* Hero Section */}
-      <section className="relative w-full h-screen overflow-hidden">
+  <section className="relative w-full h-[90vh] overflow-hidden">
         <video
           autoPlay
           loop
@@ -272,16 +272,16 @@ const ServicesPage = () => {
       <section className={`max-w-6xl mx-auto py-16 px-4 space-y-16 ${theme === 'dark' ? 'bg-[#181818]' : ''}`}>
         {t.services.map((service, index) => (
           <div key={index} className="grid md:grid-cols-2 gap-10 items-center">
-            {/* Image */}
-            <div className={`${index % 2 === 1 ? "md:order-2" : "md:order-1"}`}>
+            {/* Image always left */}
+            <div className="w-full md:w-1/2 flex justify-center items-center">
               <img
                 src={serviceImgs[index]}
                 alt={service.title}
-                className="w-full h-[350px] object-cover rounded-2xl shadow-lg"
+                className="w-full md:max-w-full md:h-[350px] max-w-md h-full object-cover rounded-2xl shadow-lg"
               />
             </div>
-            {/* Content */}
-            <div className={`${index % 2 === 1 ? "md:order-1" : "md:order-2"}`}>
+            {/* Content always right */}
+            <div className="w-full md:w-1/2 flex flex-col items-start justify-center md:pl-8">
               <h3 className="text-2xl font-bold text-red-600 mb-4">
                 {service.title}
               </h3>

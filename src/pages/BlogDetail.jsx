@@ -276,7 +276,7 @@ export default function BlogDetail() {
       <div className={`text-center py-20 ${theme === "dark" ? "bg-black text-white" : "bg-white text-black"}`}
         dir={dir}
       >
-        <h2 className="text-2xl font-bold">Blog Not Found</h2>
+  <h2 className="text-2xl font-bold text-red-500">Blog Not Found</h2>
         <Link to="/blog" className="text-red-500 underline mt-4 block">
           Back to Blogs
         </Link>
@@ -312,7 +312,7 @@ export default function BlogDetail() {
 
           return (
             <div key={index} id={sectionId} className="mb-10 scroll-mt-20">
-              <h2 className="text-2xl font-bold mb-4" style={{ color: "#ef4444", textAlign: dir === "rtl" ? "right" : "left" }}>
+              <h2 className="text-2xl font-bold mb-4 text-red-500" style={{ textAlign: dir === "rtl" ? "right" : "left" }}>
                 {sec.heading}
               </h2>
               <p className={`leading-relaxed ${theme === "dark" ? "text-gray-200" : "text-gray-700"}`}

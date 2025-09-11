@@ -36,7 +36,7 @@ const translations = {
     stepsTitle: "How It Works",
     stepsDesc: "Quick and convenient takeaway ordering in just three easy steps.",
     steps: [
-      { title: "Order Online", description: "Browse the menu and place your takeaway order in seconds." },
+      { title: "Order Online", description: "Browse  menu and Takeaway your order in seconds." },
       { title: "Choose Pickup Time", description: "Select a convenient time that works best for you." },
       { title: "Grab & Go", description: "Skip the wait — your food will be ready when you arrive." },
     ],
@@ -204,7 +204,7 @@ const TakeawayPickupHero = () => {
         </button>
       </div>
       {/* Hero Section */}
-  <section className="relative w-full h-screen overflow-hidden">
+  <section className="relative w-full h-[85vh] overflow-hidden">
         <video
           className="absolute top-0 left-0 w-full h-full object-cover"
           src={takeVideo}
@@ -227,14 +227,14 @@ const TakeawayPickupHero = () => {
   {/* About Section */}
   <section className={`py-20 px-6 md:px-20 ${sectionAltBg}`}> 
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
+          <div className="w-full md:w-1/2 flex justify-center items-center min-h-[340px] h-full">
             <img
               src={take1}
               alt="Takeaway meals"
-              className="w-full h-auto rounded-2xl shadow-lg"
+              className="w-full md:max-w-full md:h-[340px] max-w-md h-full object-cover rounded-2xl shadow-lg"
             />
           </div>
-          <div>
+          <div className="w-full md:w-1/2 flex flex-col items-start justify-center min-h-[340px] h-full md:pl-8 text-justify">
             <h2 className="text-4xl font-bold mb-6" style={dir === 'rtl' ? {textAlign:'right'} : {}}>
               {translations[language].aboutTitle}
             </h2>
@@ -245,7 +245,7 @@ const TakeawayPickupHero = () => {
         </div>
       </section>
             <section className={`py-20 px-6 ${pricingBg} text-center`} id="pricing">
-        <h2 className="text-4xl font-bold text-red-500 mb-4" style={dir === 'rtl' ? {textAlign:'right'} : {}}>{translations[language].pricingTitle}</h2>
+  <h2 className="text-4xl font-bold text-red-500 mb-4" style={dir === 'rtl' ? {textAlign:'right'} : {}}>{translations[language].pricingTitle}</h2>
   <p className="max-w-2xl mx-auto mb-12" style={dir === 'rtl' ? {textAlign:'right'} : {}}>
           {translations[language].pricingDesc}
         </p>
@@ -320,7 +320,7 @@ const TakeawayPickupHero = () => {
 
       {/* Steps Section */}
   <section className={`py-20 px-6 ${pricingBg} text-center`}>
-        <h2 className="text-4xl font-bold text-red-500 mb-4" style={dir === 'rtl' ? {textAlign:'right'} : {}}>{translations[language].stepsTitle}</h2>
+  <h2 className="text-4xl font-bold text-red-500 mb-4" style={dir === 'rtl' ? {textAlign:'right'} : {}}>{translations[language].stepsTitle}</h2>
         <p className={`${theme === 'dark' ? 'text-white' : 'text-gray-600'} max-w-2xl mx-auto mb-12`} style={dir === 'rtl' ? {textAlign:'right'} : {}}>
           {translations[language].stepsDesc}
         </p>

@@ -181,7 +181,7 @@ export default function ContactHero() {
   return (
     <div className={theme === 'dark' ? 'min-h-screen text-white' : 'min-h-screen  text-black'} dir={dir}>
       {/* Hero Section */}
-      <section className={`relative h-screen flex items-center justify-center ${theme === 'dark' ? '' : ''}`}> 
+  <section className={`relative h-[90vh] flex items-center justify-center ${theme === 'dark' ? '' : ''}`}> 
         {/* Background video */}
         <video
           autoPlay
@@ -209,7 +209,7 @@ export default function ContactHero() {
       <section className={`py-16 ${theme === 'dark' ? 'bg-[#222]' : 'bg-red-50'}`}> 
       <div className="max-w-6xl mx-auto px-6">
         {/* Section Heading */}
-  <h2 className={`text-4xl md:text-5xl font-extrabold text-center mb-12 ${theme === 'dark' ? 'text-red-500' : 'text-black'}`}
+  <h2 className={`text-4xl md:text-5xl font-extrabold text-center mb-12 text-red-500`}
           style={dir === 'rtl' ? { direction: 'rtl' } : {}}>
           {translations[language].supportHeading}
         </h2>
@@ -243,7 +243,7 @@ export default function ContactHero() {
       <div className="max-w-4xl mx-auto px-6">
          
         {/* Main Heading */}
-  <h2 className={`text-4xl md:text-5xl font-extrabold mb-10 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}
+  <h2 className={`text-4xl md:text-5xl font-extrabold mb-10 text-red-500`}
           style={dir === 'rtl' ? { direction: 'rtl' } : {}}
           dangerouslySetInnerHTML={{ __html: translations[language].needHelp }} />
 
@@ -327,7 +327,7 @@ export default function ContactHero() {
          
 
         {/* Main heading */}
-  <h2 className={`text-4xl md:text-5xl font-extrabold mb-10 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}
+  <h2 className={`text-4xl md:text-5xl font-extrabold mb-10 text-red-500`}
           style={dir === 'rtl' ? { direction: 'rtl' } : {}}>
           {translations[language].howToReach}
         </h2>
@@ -355,7 +355,7 @@ export default function ContactHero() {
         {/* Left: Image and Heading */}
         <div>
            
-          <h2 className={`text-4xl md:text-5xl font-extrabold mb-8 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}
+          <h2 className={`text-4xl md:text-5xl font-extrabold mb-8 text-red-500`}
             style={dir === 'rtl' ? { direction: 'rtl' } : {}}
             dangerouslySetInnerHTML={{ __html: translations[language].faqTitle }} />
           <img 
@@ -400,7 +400,7 @@ export default function ContactHero() {
       <section className={`py-20 ${theme === 'dark' ? 'bg-[#222]' : 'bg-red-50'}`}>
       <div className="max-w-4xl mx-auto text-center px-6">
         {/* Heading */}
-  <h2 className={`text-4xl md:text-5xl font-extrabold mb-4 ${theme === 'dark' ? 'text-red-500' : 'text-gray-900'}`}
+  <h2 className={`text-4xl md:text-5xl font-extrabold mb-4 text-red-500`}
           style={dir === 'rtl' ? { direction: 'rtl' } : {}}>
           {translations[language].stayUpdated}
         </h2>

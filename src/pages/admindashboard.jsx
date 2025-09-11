@@ -228,7 +228,7 @@ export default function UserDetailsSection() {
         <div className={clsx(
           "rounded-xl shadow p-6 mt-16 bg-white text-black border border-red-500"
         )}>
-          <h2 className="text-2xl font-bold mb-4 text-red-600">{translations[language].userSignup}</h2>
+          <h2 className="text-2xl font-bold mb-4 text-red-500">{translations[language].userSignup}</h2>
           {signupDetails.length > 0 ? (
             <div className="overflow-x-auto">
               <table className="min-w-full border rounded-lg border-red-500">
@@ -263,7 +263,7 @@ export default function UserDetailsSection() {
 
         {/* 1. Revenue Overview */}
         <div className="p-6 rounded-2xl shadow bg-white text-black border border-red-500">
-          <h2 className="text-xl font-semibold mb-4 text-red-600">{translations[language].revenue}</h2>
+          <h2 className="text-xl font-semibold mb-4 text-red-500">{translations[language].revenue}</h2>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={revenueData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -280,7 +280,7 @@ export default function UserDetailsSection() {
         <div className="grid md:grid-cols-2 gap-6">
           {/* Reservations Trend */}
           <div className="p-6 rounded-2xl shadow bg-white text-black border border-red-500">
-            <h2 className="text-xl font-semibold mb-4 text-red-600">{translations[language].reservations}</h2>
+            <h2 className="text-xl font-semibold mb-4 text-red-500">{translations[language].reservations}</h2>
             <ResponsiveContainer width="100%" height={200}>
               <AreaChart data={reservationsData}>
                 <defs>
@@ -303,7 +303,7 @@ export default function UserDetailsSection() {
           </div>
 
           <div className="p-6 rounded-2xl shadow bg-white text-black border border-red-500">
-            <h2 className="text-xl font-semibold mb-4 text-red-600">{translations[language].customerGrowth}</h2>
+            <h2 className="text-xl font-semibold mb-4 text-red-500">{translations[language].customerGrowth}</h2>
             <ResponsiveContainer width="100%" height={200}>
               <LineChart data={customersData}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -323,7 +323,7 @@ export default function UserDetailsSection() {
         {/* & 6. Popular Dishes and Deals Performance side by side */}
         <div className="grid md:grid-cols-2 gap-6">
           <div className="p-6 rounded-2xl shadow bg-white text-black border border-red-500">
-            <h2 className="text-xl font-semibold mb-4 text-red-600">{translations[language].popularDishes}</h2>
+            <h2 className="text-xl font-semibold mb-4 text-red-500">{translations[language].popularDishes}</h2>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={ordersData} barSize={75}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -339,7 +339,7 @@ export default function UserDetailsSection() {
             </ResponsiveContainer>
           </div>
           <div className="p-6 rounded-2xl shadow bg-white text-black border border-red-500">
-            <h2 className="text-xl font-semibold mb-4 text-red-600">{translations[language].deals}</h2>
+            <h2 className="text-xl font-semibold mb-4 text-red-500">{translations[language].deals}</h2>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={dealsData} barSize={75}>
                 <CartesianGrid strokeDasharray="3 3" />

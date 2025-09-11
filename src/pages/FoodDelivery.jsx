@@ -56,7 +56,7 @@ const translations = {
     howItWorksDesc: "Ordering delicious food from your favorite restaurant is simple and fast.",
     steps: [
       { title: "Choose Your Meal", description: "Browse our menu and select your favorite dishes quickly." },
-      { title: "Place Your Order", description: "Add meals to your cart, customize options, and checkout securely." },
+      { title: "Place Your Order", description: "Add meals to cart, customize , and checkout securely." },
       { title: "Fast Delivery", description: "Track your order in real-time as it arrives fresh and hot." },
       { title: "Enjoy Your Food", description: "Delicious meals delivered to your doorstep with satisfaction." },
     ],
@@ -266,7 +266,7 @@ const FoodDeliveryHero = () => {
   <div dir={dir} className={sectionBg}>
        
       {/* Hero Section */}
-      <section className="relative w-full h-screen overflow-hidden">
+  <section className="relative w-full h-[90vh] overflow-hidden">
         <video
           className="absolute top-0 left-0 object-cover w-full h-full"
           src={foodhero}
@@ -289,18 +289,18 @@ const FoodDeliveryHero = () => {
       {/* About Our Service Section */}
   <section className={`py-20 px-6 md:px-20 ${sectionAltBg}`}> 
         <div className="grid items-center gap-12 md:grid-cols-2">
-          {/* Left Image */}
-          <div>
+          {/* Left Image - balanced height */}
+          <div className="w-full md:w-1/2 flex justify-center items-center min-h-[340px] h-full">
             <img
               src={serviceImg}
               alt="Our Service"
-              className="w-full h-auto shadow-lg rounded-2xl"
+              className="w-full md:max-w-full md:h-[340px] max-w-md h-full object-cover shadow-lg rounded-2xl"
             />
           </div>
 
-          {/* Right Content */}
-          <div>
-            <h2 className="mb-6 text-4xl font-bold" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
+          {/* Right Content - balanced height */}
+          <div className="w-full md:w-1/2 flex flex-col items-start justify-center min-h-[340px] h-full md:pl-8 text-justify">
+            <h2 className="mb-6 text-4xl font-bold text-red-500" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
               {translations[language].aboutTitle}
             </h2>
             {translations[language].about.map((p, i) => (
@@ -313,7 +313,7 @@ const FoodDeliveryHero = () => {
       {/* How It Works Section */}
   <section className={`py-20 px-6 ${pricingBg} text-center`} id="how-it-works">
         <h2 className="mb-4 text-4xl font-bold text-red-500" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>{translations[language].howItWorksTitle}</h2>
-        <p className="max-w-2xl mx-auto mb-12 text-gray-600 dark:text-white" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
+  <p className="max-w-2xl mx-auto mb-12 text-black" style={dir === 'rtl' ? { textAlign: 'right' } : {}}>
           {translations[language].howItWorksDesc}
         </p>
         <div className="flex flex-wrap items-center justify-center gap-6">
@@ -322,7 +322,7 @@ const FoodDeliveryHero = () => {
               <div className="flex flex-col hover:scale-105 transition items-center max-w-[200px]">
                 <div className="rounded-full w-16 h-16 flex items-center justify-center mb-4 shadow-md bg-red-500 dark:bg-red-700">{stepIcons[index]}</div>
                 <h3 className="mb-2 text-lg font-semibold">{step.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-white">{step.description}</p>
+                <p className="text-sm text-black">{step.description}</p>
               </div>
               {index < translations[language].steps.length - 1 && (
                 <FaArrowRight size={30} className="mx-6 hidden md:block text-gray-400 dark:text-white" />

@@ -39,7 +39,7 @@ const translations = {
     steps: [
       { title: "Pick Your Plan", description: "Choose from weekly or monthly meal subscriptions." },
       { title: "Customize Your Menu", description: "Select from vegetarian, vegan, or balanced diet options." },
-      { title: "Enjoy Daily Fresh Meals", description: "Delivered to your door, ready to heat and eat." },
+      { title: "Enjoy Fresh Meals", description: "Delivered to your door, ready to heat and eat." },
     ],
     ctaTitle: "Ready to Eat Better Every Day?",
     ctaDesc: "Subscribe today and enjoy chef-prepared meals — no cooking required.",
@@ -206,7 +206,7 @@ const SubscriptionMealsHero = () => {
         </button>
       </div>
       {/* Hero Section */}
-  <section className="relative w-full h-screen overflow-hidden">
+  <section className="relative w-full h-[85vh] overflow-hidden">
         <video
           className="absolute top-0 left-0 w-full h-full object-cover"
           src={mealVideo}
@@ -229,15 +229,15 @@ const SubscriptionMealsHero = () => {
   {/* About Section */}
   <section className={`py-20 px-6 md:px-20 ${sectionAltBg}`}> 
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
+          <div className="w-full md:w-1/2 flex justify-center items-center min-h-[340px] h-full">
             <img
               src={meal1}
               alt="Subscription meal"
-              className="w-full h-auto rounded-2xl shadow-lg"
+              className="w-full md:max-w-full md:h-[340px] max-w-md h-full object-cover rounded-2xl shadow-lg"
             />
           </div>
-          <div>
-            <h2 className="text-4xl font-bold mb-6" style={dir === 'rtl' ? {textAlign:'right'} : {}}>
+          <div className="w-full md:w-1/2 flex flex-col items-start justify-center min-h-[340px] h-full md:pl-8 text-justify">
+            <h2 className="text-4xl font-bold text-red-500 mb-6" style={dir === 'rtl' ? {textAlign:'right'} : {}}>
               {translations[language].aboutTitle}
             </h2>
             {translations[language].about.map((p, i) => (

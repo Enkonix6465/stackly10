@@ -1,4 +1,6 @@
+
 import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 import aboutushero from "../assets/aboutushero.mp4";
 import special1 from "../assets/special1.jpg";
@@ -90,6 +92,7 @@ const translations = {
 };
 
 export default function AboutUs() {
+  const navigate = useNavigate();
   const [language, setLanguage] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('selectedLanguage') || 'English';
@@ -147,7 +150,7 @@ export default function AboutUs() {
       </button>
 
       {/* Hero Section */}
-      <section className="relative flex flex-col items-center justify-center h-screen w-full overflow-hidden">
+  <section className="relative flex flex-col items-center justify-center h-[90vh] w-full overflow-hidden">
         <video
           className="absolute inset-0 w-full h-full object-cover z-0 brightness-110"
           src={aboutushero}
@@ -157,10 +160,10 @@ export default function AboutUs() {
           playsInline
         />
         <div className={`absolute inset-0 z-10 ${theme === 'dark' ? 'bg-black/70' : 'bg-black/60'}`} />
-        <div className="relative z-20 flex flex-col items-center justify-center h-full w-full">
-          <h1 className="text-6xl font-serif font-bold text-white text-center mb-4 drop-shadow-lg">{t.about}</h1>
-          <span className="text-xl md:text-2xl text-white/90 text-center mb-8 max-w-2xl drop-shadow">{t.hero}</span>
-        </div>
+          <div className="relative z-20 flex flex-col items-center justify-center h-full w-full px-4 text-center">
+            <h1 className="text-4xl md:text-6xl font-serif font-bold text-white text-center mb-4 drop-shadow-lg">{t.about}</h1>
+            <span className="text-lg md:text-2xl text-white/90 text-center mb-8 max-w-2xl drop-shadow">{t.hero}</span>
+          </div>
       </section>
 
       {/* Our Mission Section */}
@@ -178,7 +181,7 @@ export default function AboutUs() {
           </div>
           {/* Right: Content */}
           <div className="grid gap-4 content-center">
-            <h2 className={`text-3xl md:text-4xl font-bold font-serif ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{t.missionTitle}</h2>
+            <h2 className={`text-3xl md:text-4xl font-bold font-serif text-red-500`}>{t.missionTitle}</h2>
             <p className={`text-lg max-w-lg ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>{t.missionDesc}</p>
           </div>
         </div>
@@ -199,7 +202,7 @@ export default function AboutUs() {
           </div>
           {/* Right: Content */}
           <div className="grid gap-4 content-center">
-            <h2 className={`text-3xl md:text-4xl font-bold font-serif ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{t.achievementsTitle}</h2>
+            <h2 className={`text-3xl md:text-4xl font-bold font-serif text-red-500`}>{t.achievementsTitle}</h2>
             <p className={`text-lg max-w-lg ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>{t.achievementsDesc}</p>
             <ul className={`space-y-2 list-disc pl-5 ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
               {t.achievementsList.map((item, i) => (
@@ -215,7 +218,7 @@ export default function AboutUs() {
         <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-10 items-center">
           {/* Left: Content */}
           <div className="grid gap-4 content-center order-2 md:order-1">
-            <h2 className={`text-3xl md:text-4xl font-bold font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.visionTitle}</h2>
+            <h2 className={`text-3xl md:text-4xl font-bold font-serif text-red-500`}>{t.visionTitle}</h2>
             <p className={`text-lg max-w-lg ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.visionDesc}</p>
           </div>
           {/* Right: Image */}
@@ -234,7 +237,7 @@ export default function AboutUs() {
       {/* Core Principles Section */}
       <section className={`w-full py-20 px-4 md:px-0 flex flex-col items-center justify-center ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
         <div className="max-w-6xl w-full mx-auto flex flex-col items-center">
-          <h2 className={`text-3xl md:text-4xl font-bold mb-8 font-serif text-center ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{t.corePrinciples}</h2>
+          <h2 className={`text-3xl md:text-4xl font-bold mb-8 font-serif text-center text-red-500`}>{t.corePrinciples}</h2>
           <div className="grid  md:grid-cols-3 gap-10 w-full">
             {/* Principle 1 */}
             <div className={`flex flex-col items-center rounded-2xl shadow-lg p-8 ${theme === 'dark' ? 'bg-[#181818]' : 'bg-red-50'}`}>
@@ -258,11 +261,21 @@ export default function AboutUs() {
       {/* CTA Section */}
       <section className={`w-full py-16 px-4 md:px-0 flex flex-col items-center justify-center ${theme === 'dark' ? 'bg-[#181818]' : 'bg-red-50'}`}>
         <div className="max-w-3xl w-full mx-auto flex flex-col items-center justify-center">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-4 text-red-600">{t.ctaTitle}</h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-4 text-red-500">{t.ctaTitle}</h2>
           <p className={`text-lg text-center mb-8 ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>{t.ctaDesc}</p>
           <div className="flex flex-row sm:flex-row gap-4">
-            <a href="#reserve" className="px-10 py-4 rounded-full text-white font-semibold text-lg shadow-lg transition bg-red-600 hover:bg-red-700">{t.reserveBtn}</a>
-            <a href="#order" className={`px-10 py-4 rounded-full font-semibold text-lg shadow-lg transition border ${theme === 'dark' ? 'text-red-400 bg-[#181818] border-red-400 hover:bg-[#222]' : 'text-red-600 bg-white border-red-600 hover:bg-red-100'}`}>{t.orderBtn}</a>
+            <button
+              onClick={() => navigate('/contactus')}
+              className="px-10 py-4 rounded-full text-white font-semibold text-lg shadow-lg transition bg-red-600 hover:bg-red-700"
+            >
+              {t.reserveBtn}
+            </button>
+            <button
+              onClick={() => navigate('/contactus')}
+              className={`px-10 py-4 rounded-full font-semibold text-lg shadow-lg transition border ${theme === 'dark' ? 'text-red-400 bg-[#181818] border-red-400 hover:bg-[#222]' : 'text-red-600 bg-white border-red-600 hover:bg-red-100'}`}
+            >
+              {t.orderBtn}
+            </button>
           </div>
         </div>
       </section>

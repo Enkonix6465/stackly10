@@ -209,7 +209,7 @@ const Header = () => {
           {/* Logo */}
           <div className="flex pl-4 sm:pl-6 lg:pl-14 items-center">
             <button onClick={() => navigate('/home1')} className="focus:outline-none">
-              <img src={logo} alt="STACKLY" className="h-6 sm:h-8 w-auto" />
+              <img src={logo} alt="STACKLY" className="h-10 sm:h-12 w-auto object-contain mr-2" />
             </button>
           </div>
 
@@ -416,21 +416,25 @@ const Header = () => {
 
           {/* Mobile icons - Only visible on very small screens */}
           <div className="flex items-center space-x-4 min-[480px]:hidden">
-            {/* Language Dropdown (Mobile) */}
+            {/* Language Dropdown (Mobile) inside Globe Icon */}
             <div className="relative">
               <button
-                className="flex items-center px-2 py-1 rounded-md border border-gray-300 bg-white text-black text-sm"
+                className="flex items-center justify-center w-10 h-10 rounded-full border border-gray-300 bg-white text-black text-sm shadow relative"
                 onClick={() => setIsLanguageDropdownOpen((v) => !v)}
                 aria-haspopup="true"
                 aria-expanded={isLanguageDropdownOpen}
               >
-                <span className="mr-1">{selectedLanguage}</span>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                {/* Globe Icon */}
+                <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+                  <path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" stroke="currentColor" strokeWidth="2" />
                 </svg>
+                {isLanguageDropdownOpen && (
+                  <span className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xs font-semibold pointer-events-none">{selectedLanguage}</span>
+                )}
               </button>
               {isLanguageDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-28 bg-white rounded-md shadow-lg border border-gray-200 py-2 z-50">
+                <div className="absolute left-1/2 top-full -translate-x-1/2 mt-2 w-28 bg-white rounded-md shadow-lg border border-gray-200 py-2 z-50">
                   <button className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLanguageChange('English')}>English</button>
                   <button className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLanguageChange('Arabic')}>Arabic</button>
                   <button className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLanguageChange('Hebrew')}>Hebrew</button>

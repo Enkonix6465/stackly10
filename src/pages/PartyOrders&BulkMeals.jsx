@@ -39,7 +39,7 @@ const translations = {
     steps: [
       { title: "Choose Your Package", description: "Select from our party platters or fully customized bulk meals." },
       { title: "Place Your Order", description: "Book online or by phone — we'll confirm every detail with you." },
-      { title: "Enjoy Your Event", description: "We deliver on time or prepare for easy pickup. Simply serve and celebrate." },
+  { title: "Enjoy Your Event", description: "We deliver on time or prepare for easy pickup. Serve and celebrate." },
     ],
     ctaTitle: "Ready to Feed Your Guests?",
     ctaDesc: "Order now and make your celebration unforgettable — we handle the food so you can enjoy the party.",
@@ -206,7 +206,7 @@ const PartyOrdersHero = () => {
         </button>
       </div>
       {/* Hero Section */}
-  <section className="relative w-full h-screen overflow-hidden">
+  <section className="relative w-full h-[85vh] overflow-hidden">
         <video
           className="absolute top-0 left-0 w-full h-full object-cover"
           src={partyVideo}
@@ -229,15 +229,15 @@ const PartyOrdersHero = () => {
   {/* About Section */}
   <section className={`py-20 px-6 md:px-20 ${sectionAltBg}`}> 
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
+          <div className="w-full md:w-1/2 flex justify-center items-center min-h-[340px] h-full">
             <img
               src={party1}
               alt="Party catering"
-              className="w-full h-auto rounded-2xl shadow-lg"
+              className="w-full md:max-w-full md:h-[340px] max-w-md h-full object-cover rounded-2xl shadow-lg"
             />
           </div>
-          <div>
-            <h2 className="text-4xl font-bold mb-6" style={dir === 'rtl' ? {textAlign:'right'} : {}}>
+          <div className="w-full md:w-1/2 flex flex-col items-start justify-center min-h-[340px] h-full md:pl-8 text-justify">
+            <h2 className="text-4xl font-bold text-red-500 mb-6" style={dir === 'rtl' ? {textAlign:'right'} : {}}>
               {translations[language].aboutTitle}
             </h2>
             {translations[language].about.map((p, i) => (

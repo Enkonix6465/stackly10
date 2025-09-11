@@ -132,8 +132,26 @@ const translations = {
 };
 
 export default function Home2() {
+  // Theme toggle handler
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('theme', newTheme);
+    }
+  };
   const chefRef = React.useRef(null);
   const navigate = useNavigate();
+  // Determine RTL based on language
+  const [language, setLanguage] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('selectedLanguage') || 'English';
+    }
+    return 'English';
+  });
+  const isRTL = language === 'Arabic';
+  // Select translations for current language
+  const t = translations[language] || translations['English'];
 
   // Scroll handler for Read More
   const handleReadMore = () => {
@@ -141,12 +159,7 @@ export default function Home2() {
       chefRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
-  const [language, setLanguage] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('selectedLanguage') || 'English';
-    }
-    return 'English';
-  });
+  // ...existing code...
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('theme') || 'light';
@@ -174,6 +187,55 @@ export default function Home2() {
       >
         {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
       </button>
+
+      {/* Hero Section */}
+  <section className="relative w-full h-[90vh] flex items-center justify-center overflow-hidden">
+        <video
+          src={home2hero}
+          autoPlay
+          loop
+          muted
+          className="absolute top-0 left-0 w-full h-full object-cover"
+        />
+        <div className="relative z-10 flex flex-col items-center justify-center text-center h-full px-4">
+          <h1 className="text-5xl md:text-7xl font-bold text-white drop-shadow-lg mb-6">{t.heroTitle}</h1>
+          <p className="mt-6 text-lg md:text-2xl text-gray-200 max-w-2xl">{t.heroDesc}</p>
+        </div>
+        <div className="absolute top-0 left-0 w-full h-full bg-black/40"></div>
+      </section>
+
+      {/* Specials Gallery Section */}
+      <section className={`py-20 px-6 md:px-20 ${theme === 'dark' ? 'bg-[#222]' : 'bg-red-50'} text-center`}>
+        <h2 className="text-4xl font-bold text-red-500 mb-8">{t.specialsTitle}</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+          {[special1, special2, special3, special4].map((img, idx) => (
+            <div key={idx} className="flex flex-col items-center">
+              <img src={img} alt={t.specials[idx]} className="w-full h-48 object-cover rounded-2xl shadow-lg mb-4" />
+              <span className="text-lg font-semibold">{t.specials[idx]}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Heritage Section */}
+      <section className={`py-20 px-6 md:px-20 ${theme === 'dark' ? 'bg-[#181818]' : 'bg-white'} flex flex-col md:flex-row items-center gap-12`}>
+        {/* Image left, content right on desktop; stacked on mobile */}
+        <div className="md:w-1/2 w-full flex justify-center items-center">
+          <img src={heritage} alt="Heritage" className="w-full max-w-md h-auto rounded-2xl shadow-lg" />
+        </div>
+        <div className="md:w-1/2 w-full flex justify-center items-center md:justify-start md:items-center text-center md:text-left">
+          <div className="w-full">
+            <h2 className="text-4xl font-bold text-red-500 mb-6">{t.heritageTitle}</h2>
+            <p className="mb-6 text-lg">{t.heritageDesc}</p>
+            <ul className="mb-6 list-disc pl-6">
+              {t.heritageList.map((item, i) => (
+                <li key={i} className="mb-2">{item}</li>
+              ))}
+            </ul>
+            <button className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition">{t.heritageBtn}</button>
+          </div>
+        </div>
+      </section>
 
       {/* Meet Our Professionals Section */}
       <section className={`w-full py-20 px-4 md:px-0 flex flex-col items-center justify-center ${theme === 'dark' ? 'bg-[#222]' : 'bg-red-50'}`} ref={chefRef}>

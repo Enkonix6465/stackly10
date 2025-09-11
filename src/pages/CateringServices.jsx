@@ -42,7 +42,7 @@ const translations = {
       { title: "Plan Your Menu", description: "Choose from a wide selection of cuisines and customize to your event." },
       { title: "Confirm Your Booking", description: "Reserve your date, finalize details, and relax while we prepare." },
       { title: "On-Time Delivery", description: "We deliver and set up everything fresh, hot, and beautifully arranged." },
-      { title: "Enjoy Your Event", description: "We handle service so you can focus on your guests." },
+      { title: "Enjoy Your Event", description: "We handle service so you can focus on your guests and enjoy the moment." },
     ],
     ctaTitle: "Ready to Book Your Event?",
     ctaDesc: "Let us handle the food while you focus on creating unforgettable moments. Reserve your catering service today!",
@@ -214,7 +214,7 @@ const CateringServicesHero = () => {
         </button>
       </div>
       {/* Hero Section */}
-  <section className="relative w-full h-screen overflow-hidden">
+  <section className="relative w-full h-[85vh] overflow-hidden">
         <video
           className="absolute top-0 left-0 w-full h-full object-cover"
           src={cateringVideo}
@@ -237,18 +237,18 @@ const CateringServicesHero = () => {
   {/* About Section */}
   <section className={`py-20 px-6 md:px-20 ${sectionAltBg}`}> 
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Left Image */}
-          <div>
+          {/* Left Image - balanced height */}
+          <div className="w-full md:w-1/2 flex justify-center items-center min-h-[340px] h-full">
             <img
               src={catering1}
               alt="Our Catering Service"
-              className="w-full h-auto rounded-2xl shadow-lg"
+              className="w-full md:max-w-full md:h-[340px] max-w-md h-full object-cover rounded-2xl shadow-lg"
             />
           </div>
 
-          {/* Right Content */}
-          <div>
-            <h2 className="text-4xl font-bold mb-6" style={dir === 'rtl' ? {textAlign:'right'} : {}}>
+          {/* Right Content - balanced height */}
+          <div className="w-full md:w-1/2 flex flex-col items-start justify-center min-h-[340px] h-full md:pl-8 text-justify">
+            <h2 className="text-4xl font-bold text-red-500 mb-6" style={dir === 'rtl' ? {textAlign:'right'} : {}}>
               {translations[language].aboutTitle}
             </h2>
             {translations[language].about.map((p, i) => (

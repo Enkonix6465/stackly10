@@ -226,10 +226,10 @@ export default function RestaurantFooter() {
           </div>
         </div>
         {/* Order Now */}
-        <div>
-          <h3 className="text-red-700 font-semibold mb-2">{translations[language].orderNow}</h3>
-          <p className={theme === 'dark' ? 'text-gray-300 text-sm mb-4' : 'text-gray-700 text-sm mb-4'}>{translations[language].orderDesc}</p>
-          <a href="/contactus" className="bg-red-600 text-white px-6 py-2 rounded-lg font-semibold shadow hover:bg-red-700 transition">{translations[language].orderNow}</a>
+        <div className="flex flex-col items-center md:items-start md:justify-center w-full">
+          <h3 className="text-red-700 font-semibold mb-2 md:text-2xl text-lg text-center md:text-left">{translations[language].orderNow}</h3>
+          <p className={theme === 'dark' ? 'text-gray-300 text-sm mb-4 md:text-base' : 'text-gray-700 text-sm mb-4 md:text-base'}>{translations[language].orderDesc}</p>
+          <a href="/contactus" className="bg-red-600 text-white px-8 md:px-14 py-2 md:py-3 rounded-lg font-semibold shadow hover:bg-red-700 transition w-auto text-center md:text-lg whitespace-nowrap">{translations[language].orderNow}</a>
         </div>
       </div>
       <div className={theme === 'dark' ? 'border-t text-center text-gray-400 text-xs py-4' : 'border-t text-center text-gray-500 text-xs py-4'}>
